@@ -1,4 +1,4 @@
-package com.gamificacao.projetogamificacao.Model;
+package com.gamificacao.projetogamificacao.Models;
 
 import java.util.Date;
 
