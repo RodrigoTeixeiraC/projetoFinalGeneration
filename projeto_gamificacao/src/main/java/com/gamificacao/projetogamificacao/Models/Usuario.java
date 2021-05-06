@@ -19,7 +19,7 @@ public class Usuario {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private long idUsuario;
 	
 	@NotNull
 	private String nome;
@@ -56,13 +56,14 @@ public class Usuario {
 	@NotNull
 	private String avatar; //Substitui icone, verificar com grupo
 
-	public long getId() {
-		return id;
+
+	public long getIdUsuario() {
+		return idUsuario;
 	}
 
-	public void setId(long id) {
-		this.id = id;
-	}
+	public void setIdUsuario(long idUsuario) {
+		this.idUsuario = idUsuario;
+	}	
 
 	public String getNome() {
 		return nome;
