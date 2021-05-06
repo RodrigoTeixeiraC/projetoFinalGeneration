@@ -3,6 +3,8 @@ package com.gamificacao.projetogamificacao.Models;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -41,10 +43,8 @@ public class PostagemQuiz {
 	private String respostaFalsa2;
 	
 	@NotNull
-	private enum mentalidade {
-
-		responsabilidadePessoal, mentalidadeDeCrescimento, orientacaoFutura, persistencia
-	};
+	@Enumerated(EnumType.STRING)
+	private Mentalidade mentalidade; 
 
 	@NotNull
 	private int pontuacao;
