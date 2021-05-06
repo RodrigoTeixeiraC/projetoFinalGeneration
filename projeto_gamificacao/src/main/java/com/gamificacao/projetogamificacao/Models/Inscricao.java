@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -18,14 +19,14 @@ public class Inscricao {
 	@NotNull
 	private enum aprovacao {
 		APROVADO, NEGADO, AGUARDANDO 
-	};
+	}
 	
-	@NotNull
-	private long fkUsuario;
+	@ManyToOne
+	private Usuario usuarioInscricao;
 	
-	@NotNull
-	private long fkGrupo;
-
+	@ManyToOne
+	private Grupo grupoInscricao;
+	
 	
 	
 	public long getId() {
@@ -36,22 +37,19 @@ public class Inscricao {
 		this.id = id;
 	}
 
-	public long getFkUsuario() {
-		return fkUsuario;
+	public Usuario getUsuarioInscricao() {
+		return usuarioInscricao;
 	}
 
-	public void setFkUsuario(long fkUsuario) {
-		this.fkUsuario = fkUsuario;
+	public void setUsuarioInscricao(Usuario usuarioInscricao) {
+		this.usuarioInscricao = usuarioInscricao;
 	}
 
-	public long getFkGrupo() {
-		return fkGrupo;
+	public Grupo getGrupoInscricao() {
+		return grupoInscricao;
 	}
 
-	public void setFkGrupo(long fkGrupo) {
-		this.fkGrupo = fkGrupo;
+	public void setGrupoInscricao(Grupo grupoInscricao) {
+		this.grupoInscricao = grupoInscricao;
 	}
-	
-	
-
 }
