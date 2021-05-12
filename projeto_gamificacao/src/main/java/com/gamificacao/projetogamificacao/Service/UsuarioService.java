@@ -18,9 +18,12 @@ public class UsuarioService {
 	
 	public Optional<Usuario> cadastrarUsuario (Usuario usuario){
 		
-		Optional<Usuario> usuarioExistente = repository.findByUsuario(usuario.getUsuario());
+		Optional<Usuario> usuarioExistente = repository.findByUsuarioOrEmail(usuario.getUsuario());
 		
-		if (usuarioExistente.isPresent()) {
+		Optional<Usuario> emailExistente = repository.findByUsuarioOrEmail(usuario.getEmail());
+
+		
+		if (usuarioExistente.isPresent() || emailExistente.isPresent()) {
 			return Optional.empty();
 		}
 		else {
@@ -35,7 +38,7 @@ public class UsuarioService {
 	
 	public Optional<UsuarioLogin> Logar (Optional<UsuarioLogin> user){
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-		Optional<Usuario> usuario = repository.findByUsuario(user.get().getSenha());
+		Optional<Usuario> usuario = repository.findByUsuarioOrEmail(user.get().getUsuario());
 		
 		if (usuario.isPresent()) {
 			if (encoder.matches(user.get().getSenha(), usuario.get().getSenha()));
@@ -45,7 +48,6 @@ public class UsuarioService {
 			String authHeader = "Basic " + new String (encodeAuth);
 			
 			user.get().setToken(authHeader);
-			user.get().setNome(usuario.get().getNome());
 			
 			return user;
 		}
