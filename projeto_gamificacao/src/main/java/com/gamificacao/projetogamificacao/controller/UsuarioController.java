@@ -1,4 +1,4 @@
-package com.gamificacao.projetogamificacao.Controller;
+package com.gamificacao.projetogamificacao.controller;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gamificacao.projetogamificacao.Models.Usuario;
+import com.gamificacao.projetogamificacao.Models.UsuarioLogin;
 import com.gamificacao.projetogamificacao.Repository.UsuarioRepository;
+import com.gamificacao.projetogamificacao.Service.UsuarioService;
 
 @RestController
 @CrossOrigin ("*")
@@ -26,6 +28,9 @@ public class UsuarioController  {
 
 	@Autowired
 	private UsuarioRepository repositoryUser;
+	
+	@Autowired
+	private UsuarioService usuarioService;
 	
 	@GetMapping
 	public ResponseEntity<List<Usuario>> getAll(){
@@ -56,6 +61,18 @@ public class UsuarioController  {
 	@DeleteMapping ("/deletar/{idUsuario}")
 	public void delete (@PathVariable long idUsuario) {
 		repositoryUser.deleteById(idUsuario);
+	}
+	
+	@PostMapping ("/logar")
+	public ResponseEntity<UsuarioLogin> Autentication(@RequestBody Optional<UsuarioLogin> user){
+		return usuarioService.Logar(user).map(resp -> ResponseEntity.ok(resp))
+				.orElse(ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());
+	}
+	
+	@PostMapping("/cadastrar")
+	public ResponseEntity<Optional<Usuario>> Post(@RequestBody Usuario usuario){
+		return ResponseEntity.status(HttpStatus.CREATED)
+				.body(usuarioService.cadastrarUsuario(usuario));
 	}
 }
 
