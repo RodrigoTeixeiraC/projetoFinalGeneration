@@ -1,4 +1,4 @@
-package com.gamificacao.projetogamificacao.Controller;
+package com.gamificacao.projetogamificacao.controller;
 
 import java.util.List;
 
