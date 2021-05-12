@@ -27,6 +27,9 @@ public class Usuario {
 	private long idUsuario;
 	
 	@NotNull
+	private String usuario;
+	
+	@NotNull
 	private String nome;
 	
 	@NotNull
@@ -183,6 +186,16 @@ public class Usuario {
 	public void setAvatar(String avatar) {
 		this.avatar = avatar;
 	}
+	
+	
+
+	public String getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
+	}
 
 	public List<Inscricao> getListaInscricao() {
 		return listaInscricao;
@@ -207,5 +220,4 @@ public class Usuario {
 	public void setPostagemQuiz(List<PostagemQuiz> postagemQuiz) {
 		this.postagemQuiz = postagemQuiz;
 	}
-
 }
