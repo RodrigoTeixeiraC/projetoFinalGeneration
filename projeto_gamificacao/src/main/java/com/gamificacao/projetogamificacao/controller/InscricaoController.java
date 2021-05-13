@@ -1,4 +1,4 @@
-package com.gamificacao.projetogamificacao.Controller;
+package com.gamificacao.projetogamificacao.controller;
 
 import java.util.List;
 
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.gamificacao.projetogamificacao.Models.Inscricao;
+import com.gamificacao.projetogamificacao.Models.InscricaoGrupo;
 import com.gamificacao.projetogamificacao.Repository.InscricaoRepository;
 
 @RestController
@@ -28,24 +28,24 @@ public class InscricaoController {
 	private InscricaoRepository repository;
 
 	@GetMapping
-	public ResponseEntity<List<Inscricao>> getAll() {
+	public ResponseEntity<List<InscricaoGrupo>> getAll() {
 		return ResponseEntity.ok(repository.findAll());
 	}
 
 	@GetMapping("/id/{id}")
-	public ResponseEntity<Inscricao> GetById(@PathVariable Long id) {
+	public ResponseEntity<InscricaoGrupo> GetById(@PathVariable Long id) {
 
 		return repository.findById(id).map(inscricao -> ResponseEntity.ok(inscricao))
 				.orElse(ResponseEntity.notFound().build());
 	}
 
 	@PostMapping
-	public ResponseEntity<Inscricao> post(@RequestBody Inscricao inscricao) {
+	public ResponseEntity<InscricaoGrupo> post(@RequestBody InscricaoGrupo inscricao) {
 		return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(inscricao));
 	}
 
 	@PutMapping
-	public ResponseEntity<Inscricao> put(@RequestBody Inscricao inscricao) {
+	public ResponseEntity<InscricaoGrupo> put(@RequestBody InscricaoGrupo inscricao) {
 		return ResponseEntity.ok(repository.save(inscricao));
 	}
 
