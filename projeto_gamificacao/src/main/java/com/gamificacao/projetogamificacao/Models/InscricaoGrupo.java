@@ -8,9 +8,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+
 @Entity
 @Table(name = "tb_inscricao")
-public class Inscricao {
+public class InscricaoGrupo {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,8 +28,7 @@ public class Inscricao {
 	@ManyToOne
 	private Grupo grupoInscricao;
 	
-	
-	
+
 	public long getId() {
 		return id;
 	}

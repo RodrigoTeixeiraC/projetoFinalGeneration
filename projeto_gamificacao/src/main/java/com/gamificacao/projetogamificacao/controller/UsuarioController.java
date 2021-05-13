@@ -44,7 +44,7 @@ public class UsuarioController  {
 	
 	@GetMapping ("/nome/sobrenome/{nome}/{sobrenome}")
 	public ResponseEntity <?> getByNomeAndSobrenome (@PathVariable String nome, @PathVariable String sobrenome){
-		Optional <List<Usuario>> pesquisaUsuario = repositoryUser.FindAllByNomeContainingOrSobrenomeContainingIgnoreCase(nome, sobrenome);
+		Optional <List<Usuario>> pesquisaUsuario = repositoryUser.findAllByNomeContainingOrSobrenomeContainingIgnoreCase(nome, sobrenome);
 		return pesquisaUsuario.map(user -> ResponseEntity.ok(user)).orElse(ResponseEntity.notFound().build()); 
 	}
 	
