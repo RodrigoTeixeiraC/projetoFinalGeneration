@@ -38,8 +38,8 @@ public class UsuarioController  {
 	}
 	
 	@GetMapping ("/id/{id}")
-	public ResponseEntity<Usuario> getById (@PathVariable long idUsuario){
-		return repositoryUser.findById(idUsuario).map(usuario -> ResponseEntity.ok(usuario)).orElse(ResponseEntity.notFound().build());
+	public ResponseEntity<Usuario> getById (@PathVariable long id){
+		return repositoryUser.findById(id).map(usuario -> ResponseEntity.ok(usuario)).orElse(ResponseEntity.notFound().build());
 	}
 	
 	@GetMapping ("/nome/sobrenome/{nome}/{sobrenome}")

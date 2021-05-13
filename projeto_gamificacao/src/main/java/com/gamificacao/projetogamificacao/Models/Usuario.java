@@ -1,7 +1,7 @@
 package com.gamificacao.projetogamificacao.Models;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -17,7 +17,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
@@ -27,7 +27,7 @@ public class Usuario {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long idUsuario;
+	private long id;
 	
 	@NotNull
 	private String usuario;
@@ -44,8 +44,9 @@ public class Usuario {
 	@NotNull
 	private long celular;
 	
-	@NotNull
-	private Date dataNascimento; //foi incluido o java.util verificar se está certo(outro é sql)
+	@NotNull (message = "O campo Data de nascimento de  não pode ser vazio!")
+	@JsonFormat(pattern = "dd/MM/yyyy")
+	private LocalDate dataNascimento;
 	
 	private int responsabilidadePessoal; //Discutir se será NotNull
 	
@@ -73,12 +74,12 @@ public class Usuario {
 	@OneToMany (mappedBy = "usuarioInscricao", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
 	private List<InscricaoGrupo> listaInscricao = new ArrayList<>();
 
-	public long getIdUsuario() {
-		return idUsuario;
+	public long getId() {
+		return id;
 	}
 
-	public void setIdUsuario(long idUsuario) {
-		this.idUsuario = idUsuario;
+	public void setId(long idUsuario) {
+		this.id = idUsuario;
 	}
 
 	public String getUsuario() {
@@ -121,11 +122,13 @@ public class Usuario {
 		this.celular = celular;
 	}
 
-	public Date getDataNascimento() {
+	
+
+	public LocalDate getDataNascimento() {
 		return dataNascimento;
 	}
 
-	public void setDataNascimento(Date dataNascimento) {
+	public void setDataNascimento(LocalDate dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
 

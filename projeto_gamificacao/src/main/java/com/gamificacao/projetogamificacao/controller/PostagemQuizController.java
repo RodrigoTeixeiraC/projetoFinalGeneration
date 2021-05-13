@@ -2,7 +2,6 @@ package com.gamificacao.projetogamificacao.controller;
 
 import java.util.List;
 
-import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,8 +31,8 @@ public class PostagemQuizController {
 		return ResponseEntity.ok(repository.findAll());
 	}
 	
-	public @GetMapping ("/{idPostagem}") ResponseEntity<PostagemQuiz> GetById (@PathVariable long idPostagem){
-		return repository.findById(idPostagem).map (postQuiz -> ResponseEntity.ok(postQuiz)).orElse(ResponseEntity.notFound().build());
+	public @GetMapping ("/{id}") ResponseEntity<PostagemQuiz> GetById (@PathVariable long id){
+		return repository.findById(id).map (postQuiz -> ResponseEntity.ok(postQuiz)).orElse(ResponseEntity.notFound().build());
 	}	
 	
 	
