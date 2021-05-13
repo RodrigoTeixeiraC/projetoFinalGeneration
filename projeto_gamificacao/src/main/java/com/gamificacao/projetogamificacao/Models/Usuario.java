@@ -54,7 +54,7 @@ public class Usuario {
 	
 	private int persistencia;//Discutir se será NotNull
 	
-	private String clan;
+	private List<Usuario> clan = new ArrayList<>();
 	
 	@NotNull
 	private String senha;
@@ -73,6 +73,8 @@ public class Usuario {
 	@OneToMany (mappedBy = "usuarioPostQuiz", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
 	private List<PostagemQuiz> postagemQuiz = new ArrayList<>();
 	
+	@OneToMany (mappedBy = "usuarioAtividades", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+	private List<Atividades> atividades  = new ArrayList<>();
 	
 
 	public long getIdUsuario() {
@@ -155,11 +157,11 @@ public class Usuario {
 		this.persistencia = persistencia;
 	}
 
-	public String getClan() {
+	public List<Usuario> getClan() {
 		return clan;
 	}
 
-	public void setClan(String clan) {
+	public void setClan(List<Usuario> clan) {
 		this.clan = clan;
 	}
 
@@ -219,5 +221,13 @@ public class Usuario {
 
 	public void setPostagemQuiz(List<PostagemQuiz> postagemQuiz) {
 		this.postagemQuiz = postagemQuiz;
+	}
+
+	public List<Atividades> getAtividades() {
+		return atividades;
+	}
+
+	public void setAtividades(List<Atividades> atividades) {
+		this.atividades = atividades;
 	}
 }
