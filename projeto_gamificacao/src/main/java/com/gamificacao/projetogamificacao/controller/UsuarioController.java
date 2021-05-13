@@ -38,13 +38,13 @@ public class UsuarioController  {
 	}
 	
 	@GetMapping ("/id/{id}")
-	public ResponseEntity<Usuario> getById (@PathVariable long idUsuario){
-		return repositoryUser.findById(idUsuario).map(usuario -> ResponseEntity.ok(usuario)).orElse(ResponseEntity.notFound().build());
+	public ResponseEntity<Usuario> getById (@PathVariable long id){
+		return repositoryUser.findById(id).map(usuario -> ResponseEntity.ok(usuario)).orElse(ResponseEntity.notFound().build());
 	}
 	
 	@GetMapping ("/nome/sobrenome/{nome}/{sobrenome}")
 	public ResponseEntity <?> getByNomeAndSobrenome (@PathVariable String nome, @PathVariable String sobrenome){
-		Optional <List<Usuario>> pesquisaUsuario = repositoryUser.FindAllByNomeContainingOrSobrenomeContainingIgnoreCase(nome, sobrenome);
+		Optional <List<Usuario>> pesquisaUsuario = repositoryUser.findAllByNomeContainingOrSobrenomeContainingIgnoreCase(nome, sobrenome);
 		return pesquisaUsuario.map(user -> ResponseEntity.ok(user)).orElse(ResponseEntity.notFound().build()); 
 	}
 	

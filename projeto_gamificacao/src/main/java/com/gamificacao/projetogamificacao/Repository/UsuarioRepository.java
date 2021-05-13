@@ -11,9 +11,9 @@ import com.gamificacao.projetogamificacao.Models.Usuario;
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Long>{
 	
-	public Optional <List<Usuario>> FindAllByNomeContainingOrSobrenomeContainingIgnoreCase (String nome, String sobrenome);   
+	public Optional <List<Usuario>> findAllByNomeContainingOrSobrenomeContainingIgnoreCase (String nome, String sobrenome);   
 
-	 public Optional<Usuario> findByUsuarioOrEmail(String userName);
+	 public Optional<Usuario> findByUsuarioOrEmail(String userName, String email);
 
 	
 }
