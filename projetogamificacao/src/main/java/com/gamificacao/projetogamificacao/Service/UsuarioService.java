@@ -1,6 +1,7 @@
 package com.gamificacao.projetogamificacao.Service;
 
 import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -17,6 +18,7 @@ import com.gamificacao.projetogamificacao.Models.PostagemQuiz;
 import com.gamificacao.projetogamificacao.Models.Usuario;
 import com.gamificacao.projetogamificacao.Models.UsuarioLogin;
 import com.gamificacao.projetogamificacao.Repository.GrupoRepository;
+import com.gamificacao.projetogamificacao.Repository.InscricaoRepository;
 import com.gamificacao.projetogamificacao.Repository.PostagemQuizRepository;
 import com.gamificacao.projetogamificacao.Repository.UsuarioRepository;
 
@@ -31,6 +33,9 @@ public class UsuarioService {
 	
 	@Autowired 
 	private PostagemQuizRepository PostQuizRepository;
+	
+	@Autowired 
+	private InscricaoRepository inscricaorepository;
 
 	public Optional<Usuario> cadastrarUsuario(Usuario usuario) {
 
@@ -109,18 +114,25 @@ public class UsuarioService {
 	}
 	
 
-	public Optional<List<PostagemQuiz>> buscarPostQuiz (Usuario usuario){
-	
-		List<InscricaoGrupo> gruposInscritos = usuario.getListaInscricaoUG();
+	public List<PostagemQuiz> buscarPostQuiz (Usuario usuario){
 		
-		gruposInscritos.stream()
-		.map(grupo -> 
-			grupo.getGrupoInscricao().getListaPostQuiz()
-				.stream()
-				.map(postQuiz -> {
-					postQuiz.getId();
-					return PostQuizRepository.findById(postQuiz);
-					}).orElse(Optional.empty())).orElse(Optional.empty());
+		List<PostagemQuiz> postagensGrupos = new ArrayList<>();
+		List<Grupo> grupos = new ArrayList<>();
+		Optional<List<InscricaoGrupo>> listaInscricao = inscricaorepository.findByUsuarioInscricao(usuario);
+		
+		listaInscricao
+			.get()
+			.stream()
+			.forEach(grupo -> grupos
+					.add(grupo.getGrupoInscricao()));
+		
+		grupos
+			.forEach(listaPostagens -> listaPostagens
+					.getListaPostQuiz()
+					.forEach(postagem -> postagensGrupos
+							.add(postagem)));
+		
+		return postagensGrupos;
 		
 	}
 }
