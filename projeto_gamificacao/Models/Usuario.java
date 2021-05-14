@@ -215,6 +215,9 @@ public class Usuario {
 		this.amigo = amigo;
 	}
 
+	public List<Atividades> getAtividades() {
+		return null;
+	}
 	public List<Grupo> getGruposCriados() {
 		return gruposCriados;
 	}
@@ -222,5 +225,4 @@ public class Usuario {
 	public void setGruposCriados(List<Grupo> gruposCriados) {
 		this.gruposCriados = gruposCriados;
 	}
-	
 }
