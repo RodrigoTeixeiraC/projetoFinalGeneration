@@ -3,9 +3,13 @@ package com.gamificacao.projetogamificacao.Models;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -41,16 +45,23 @@ public class PostagemQuiz {
 	private String respostaFalsa2;
 	
 	@NotNull
-	private enum mentalidade {
-
-		responsabilidadePessoal, mentalidadeDeCrescimento, orientacaoFutura, persistencia
-	};
+	@Enumerated(EnumType.STRING)
+	private Mentalidade mentalidade; 
 
 	@NotNull
 	private int pontuacao;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date data = new java.sql.Date(System.currentTimeMillis());
+	
+	@ManyToOne 
+	@JoinColumn (name  = "idCriadorPost")
+	private Usuario usuarioPostQuiz;
+	
+	@ManyToOne 
+	@JoinColumn (name  = "idGrupoPost")
+	private Grupo grupoPostQuiz;
+	
 
 	public long getIdPostagem() {
 		return idPostagem;
@@ -124,4 +135,27 @@ public class PostagemQuiz {
 		this.data = data;
 	}
 
+	public Mentalidade getMentalidade() {
+		return mentalidade;
+	}
+
+	public void setMentalidade(Mentalidade mentalidade) {
+		this.mentalidade = mentalidade;
+	}
+
+	public Usuario getUsuarioPostQuiz() {
+		return usuarioPostQuiz;
+	}
+
+	public void setUsuarioPostQuiz(Usuario usuarioPostQuiz) {
+		this.usuarioPostQuiz = usuarioPostQuiz;
+	}
+
+	public Grupo getGrupoPostQuiz() {
+		return grupoPostQuiz;
+	}
+
+	public void setGrupoPostQuiz(Grupo grupoPostQuiz) {
+		this.grupoPostQuiz = grupoPostQuiz;
+	}
 }

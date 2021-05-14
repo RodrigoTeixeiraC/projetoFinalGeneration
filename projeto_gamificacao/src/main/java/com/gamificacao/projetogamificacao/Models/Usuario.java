@@ -1,11 +1,16 @@
 package com.gamificacao.projetogamificacao.Models;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
@@ -19,7 +24,10 @@ public class Usuario {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private long idUsuario;
+	
+	@NotNull
+	private String usuario;
 	
 	@NotNull
 	private String nome;
@@ -55,14 +63,25 @@ public class Usuario {
 	
 	@NotNull
 	private String avatar; //Substitui icone, verificar com grupo
+	
+	@OneToMany (mappedBy = "usuarioInscricao", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+	private List<Inscricao> listaInscricao;
+	
+	@OneToMany (mappedBy = "usuarioCriador", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+	private List<Grupo> gruposCriados = new ArrayList<>();
+	
+	@OneToMany (mappedBy = "usuarioPostQuiz", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+	private List<PostagemQuiz> postagemQuiz = new ArrayList<>();
+	
+	
 
-	public long getId() {
-		return id;
+	public long getIdUsuario() {
+		return idUsuario;
 	}
 
-	public void setId(long id) {
-		this.id = id;
-	}
+	public void setIdUsuario(long idUsuario) {
+		this.idUsuario = idUsuario;
+	}	
 
 	public String getNome() {
 		return nome;
@@ -169,7 +188,36 @@ public class Usuario {
 	}
 	
 	
-	
-	
 
+	public String getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
+	}
+
+	public List<Inscricao> getListaInscricao() {
+		return listaInscricao;
+	}
+
+	public void setListaInscricao(List<Inscricao> listaInscricao) {
+		this.listaInscricao = listaInscricao;
+	}
+
+	public List<Grupo> getGruposCriados() {
+		return gruposCriados;
+	}
+
+	public void setGruposCriados(List<Grupo> gruposCriados) {
+		this.gruposCriados = gruposCriados;
+	}
+
+	public List<PostagemQuiz> getPostagemQuiz() {
+		return postagemQuiz;
+	}
+
+	public void setPostagemQuiz(List<PostagemQuiz> postagemQuiz) {
+		this.postagemQuiz = postagemQuiz;
+	}
 }

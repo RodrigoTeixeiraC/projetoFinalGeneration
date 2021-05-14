@@ -1,9 +1,17 @@
 package com.gamificacao.projetogamificacao.Models;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -31,7 +39,17 @@ public class Grupo {
 	
 	@NotNull
 	private int id_usuarios;
+	
+	@OneToMany (mappedBy = "grupoInscricao", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+	private List<Inscricao> listaInscricao;
 
+	@ManyToOne 
+	@JoinColumn (name = "idCriador")
+	private Usuario usuarioCriador;
+	
+	@OneToMany (mappedBy = "grupoPostQuiz", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+	private List<PostagemQuiz> listaPostQuiz = new ArrayList<>();
+	
 	public long getId_grupo() {
 		return id_grupo;
 	}
@@ -78,6 +96,30 @@ public class Grupo {
 
 	public void setId_usuarios(int id_usuarios) {
 		this.id_usuarios = id_usuarios;
+	}
+
+	public List<Inscricao> getListaInscricao() {
+		return listaInscricao;
+	}
+
+	public void setListaInscricao(List<Inscricao> listaInscricao) {
+		this.listaInscricao = listaInscricao;
+	}
+
+	public Usuario getUsuarioCriador() {
+		return usuarioCriador;
+	}
+
+	public void setUsuarioCriador(Usuario usuarioCriador) {
+		this.usuarioCriador = usuarioCriador;
+	}
+
+	public List<PostagemQuiz> getListaPostQuiz() {
+		return listaPostQuiz;
+	}
+
+	public void setListaPostQuiz(List<PostagemQuiz> listaPostQuiz) {
+		this.listaPostQuiz = listaPostQuiz;
 	}
 
 }
