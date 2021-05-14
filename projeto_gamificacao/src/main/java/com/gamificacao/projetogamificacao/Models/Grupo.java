@@ -1,7 +1,9 @@
 package com.gamificacao.projetogamificacao.Models;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -9,8 +11,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -24,7 +24,7 @@ public class Grupo {
 	
 	@Id
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
-	private long id_grupo;
+	private long id;
 	
 	@NotNull
 	@Size (min = 4, max = 14)
@@ -37,25 +37,20 @@ public class Grupo {
 	
 	private String icone;
 	
-	@NotNull
-	private int id_usuarios;
-	
 	@OneToMany (mappedBy = "grupoInscricao", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
-	private List<Inscricao> listaInscricao;
-
-	@ManyToOne 
-	@JoinColumn (name = "idCriador")
-	private Usuario usuarioCriador;
+	private Set<InscricaoGrupo> listaInscricao = new HashSet<>();
 	
 	@OneToMany (mappedBy = "grupoPostQuiz", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
 	private List<PostagemQuiz> listaPostQuiz = new ArrayList<>();
 	
-	public long getId_grupo() {
-		return id_grupo;
+	private long idUsuarioCriador;
+
+	public long getId() {
+		return id;
 	}
 
-	public void setId_grupo(long id_grupo) {
-		this.id_grupo = id_grupo;
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	public String getNome() {
@@ -89,29 +84,15 @@ public class Grupo {
 	public void setIcone(String icone) {
 		this.icone = icone;
 	}
+
 	
-	public int getId_usuarios() {
-		return id_usuarios;
-	}
 
-	public void setId_usuarios(int id_usuarios) {
-		this.id_usuarios = id_usuarios;
-	}
-
-	public List<Inscricao> getListaInscricao() {
+	public Set<InscricaoGrupo> getListaInscricao() {
 		return listaInscricao;
 	}
 
-	public void setListaInscricao(List<Inscricao> listaInscricao) {
+	public void setListaInscricao(Set<InscricaoGrupo> listaInscricao) {
 		this.listaInscricao = listaInscricao;
-	}
-
-	public Usuario getUsuarioCriador() {
-		return usuarioCriador;
-	}
-
-	public void setUsuarioCriador(Usuario usuarioCriador) {
-		this.usuarioCriador = usuarioCriador;
 	}
 
 	public List<PostagemQuiz> getListaPostQuiz() {
@@ -120,6 +101,14 @@ public class Grupo {
 
 	public void setListaPostQuiz(List<PostagemQuiz> listaPostQuiz) {
 		this.listaPostQuiz = listaPostQuiz;
+	}
+
+	public long getIdUsuarioCriador() {
+		return idUsuarioCriador;
+	}
+
+	public void setIdUsuarioCriador(long idUsuarioCriador) {
+		this.idUsuarioCriador = idUsuarioCriador;
 	}
 
 }

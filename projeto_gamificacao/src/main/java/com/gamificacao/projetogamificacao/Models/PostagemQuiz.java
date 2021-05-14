@@ -22,13 +22,8 @@ public class PostagemQuiz {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long idPostagem;
+	private long id;
 	
-	@NotNull
-	private int fkUsuario;
-	@NotNull
-	private int fkGrupo;
-
 	@NotNull
 	@Size(min = 10, max = 200)
 	private String pergunta;
@@ -45,46 +40,25 @@ public class PostagemQuiz {
 	private String respostaFalsa2;
 	
 	@NotNull
-	@Enumerated(EnumType.STRING)
-	private Mentalidade mentalidade; 
-
-	@NotNull
 	private int pontuacao;
+	
+	@NotNull
+	@Enumerated(EnumType.STRING)
+	private Mentalidade mentalidade;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date data = new java.sql.Date(System.currentTimeMillis());
 	
 	@ManyToOne 
-	@JoinColumn (name  = "idCriadorPost")
-	private Usuario usuarioPostQuiz;
-	
-	@ManyToOne 
-	@JoinColumn (name  = "idGrupoPost")
+	@JoinColumn
 	private Grupo grupoPostQuiz;
-	
 
-	public long getIdPostagem() {
-		return idPostagem;
+	public long getId() {
+		return id;
 	}
 
-	public void setIdPostagem(long idPostagem) {
-		this.idPostagem = idPostagem;
-	}
-
-	public int getFkUsuario() {
-		return fkUsuario;
-	}
-
-	public void setFkUsuario(int fkUsuario) {
-		this.fkUsuario = fkUsuario;
-	}
-
-	public int getFkGrupo() {
-		return fkGrupo;
-	}
-
-	public void setFkGrupo(int fkGrupo) {
-		this.fkGrupo = fkGrupo;
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	public String getPergunta() {
@@ -127,14 +101,6 @@ public class PostagemQuiz {
 		this.pontuacao = pontuacao;
 	}
 
-	public Date getData() {
-		return data;
-	}
-
-	public void setData(Date data) {
-		this.data = data;
-	}
-
 	public Mentalidade getMentalidade() {
 		return mentalidade;
 	}
@@ -143,12 +109,12 @@ public class PostagemQuiz {
 		this.mentalidade = mentalidade;
 	}
 
-	public Usuario getUsuarioPostQuiz() {
-		return usuarioPostQuiz;
+	public Date getData() {
+		return data;
 	}
 
-	public void setUsuarioPostQuiz(Usuario usuarioPostQuiz) {
-		this.usuarioPostQuiz = usuarioPostQuiz;
+	public void setData(Date data) {
+		this.data = data;
 	}
 
 	public Grupo getGrupoPostQuiz() {

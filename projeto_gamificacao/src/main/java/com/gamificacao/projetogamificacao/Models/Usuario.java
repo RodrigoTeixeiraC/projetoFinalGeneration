@@ -1,8 +1,10 @@
 package com.gamificacao.projetogamificacao.Models;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -10,12 +12,13 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 
-import org.hibernate.validator.constraints.UniqueElements;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
 @Entity
@@ -24,7 +27,7 @@ public class Usuario {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long idUsuario;
+	private long id;
 	
 	@NotNull
 	private String usuario;
@@ -36,15 +39,14 @@ public class Usuario {
 	private String sobrenome;
 	
 	@NotNull
-	@Email
-	@UniqueElements // pesquisar sobre essa notação e sobre @UniqueConstraint
 	private String email;
 	
 	@NotNull
 	private long celular;
 	
-	@NotNull
-	private Date dataNascimento; //foi incluido o java.util verificar se está certo(outro é sql)
+	@NotNull (message = "O campo Data de nascimento de  não pode ser vazio!")
+	@JsonFormat(pattern = "dd/MM/yyyy")
+	private LocalDate dataNascimento;
 	
 	private int responsabilidadePessoal; //Discutir se será NotNull
 	
@@ -54,7 +56,12 @@ public class Usuario {
 	
 	private int persistencia;//Discutir se será NotNull
 	
-	private String clan;
+	@OneToMany(mappedBy = "amigo")
+	private Set<Usuario> clan = new HashSet<Usuario>();
+	
+	@ManyToOne
+	@JsonIgnoreProperties("clan")
+	private Usuario amigo;
 	
 	@NotNull
 	private String senha;
@@ -65,23 +72,23 @@ public class Usuario {
 	private String avatar; //Substitui icone, verificar com grupo
 	
 	@OneToMany (mappedBy = "usuarioInscricao", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
-	private List<Inscricao> listaInscricao;
-	
-	@OneToMany (mappedBy = "usuarioCriador", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
-	private List<Grupo> gruposCriados = new ArrayList<>();
-	
-	@OneToMany (mappedBy = "usuarioPostQuiz", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
-	private List<PostagemQuiz> postagemQuiz = new ArrayList<>();
-	
-	
+	private List<InscricaoGrupo> listaInscricao = new ArrayList<>();
 
-	public long getIdUsuario() {
-		return idUsuario;
+	public long getId() {
+		return id;
 	}
 
-	public void setIdUsuario(long idUsuario) {
-		this.idUsuario = idUsuario;
-	}	
+	public void setId(long idUsuario) {
+		this.id = idUsuario;
+	}
+
+	public String getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
+	}
 
 	public String getNome() {
 		return nome;
@@ -115,11 +122,13 @@ public class Usuario {
 		this.celular = celular;
 	}
 
-	public Date getDataNascimento() {
+	
+
+	public LocalDate getDataNascimento() {
 		return dataNascimento;
 	}
 
-	public void setDataNascimento(Date dataNascimento) {
+	public void setDataNascimento(LocalDate dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
 
@@ -155,11 +164,11 @@ public class Usuario {
 		this.persistencia = persistencia;
 	}
 
-	public String getClan() {
+	public Set<Usuario> getClan() {
 		return clan;
 	}
 
-	public void setClan(String clan) {
+	public void setClan(Set<Usuario> clan) {
 		this.clan = clan;
 	}
 
@@ -186,38 +195,20 @@ public class Usuario {
 	public void setAvatar(String avatar) {
 		this.avatar = avatar;
 	}
-	
-	
 
-	public String getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(String usuario) {
-		this.usuario = usuario;
-	}
-
-	public List<Inscricao> getListaInscricao() {
+	public List<InscricaoGrupo> getListaInscricao() {
 		return listaInscricao;
 	}
 
-	public void setListaInscricao(List<Inscricao> listaInscricao) {
+	public void setListaInscricao(List<InscricaoGrupo> listaInscricao) {
 		this.listaInscricao = listaInscricao;
 	}
 
-	public List<Grupo> getGruposCriados() {
-		return gruposCriados;
+	public Usuario getAmigo() {
+		return amigo;
 	}
 
-	public void setGruposCriados(List<Grupo> gruposCriados) {
-		this.gruposCriados = gruposCriados;
-	}
-
-	public List<PostagemQuiz> getPostagemQuiz() {
-		return postagemQuiz;
-	}
-
-	public void setPostagemQuiz(List<PostagemQuiz> postagemQuiz) {
-		this.postagemQuiz = postagemQuiz;
+	public void setAmigo(Usuario amigo) {
+		this.amigo = amigo;
 	}
 }
