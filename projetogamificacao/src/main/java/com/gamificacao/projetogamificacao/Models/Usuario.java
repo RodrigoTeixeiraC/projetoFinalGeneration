@@ -66,6 +66,9 @@ public class Usuario {
 	@JsonIgnoreProperties({"criador"})
 	private List<Grupo> gruposCriados = new ArrayList<>();
 	
+	@OneToMany(mappedBy = "atividades")
+	private List<Atividades> atividadesUsuario = new ArrayList<>();
+	
 	@NotNull
 	private String senha;
 	
@@ -221,6 +224,14 @@ public class Usuario {
 
 	public void setGruposCriados(List<Grupo> gruposCriados) {
 		this.gruposCriados = gruposCriados;
+	}
+
+	public List<Atividades> getAtividadesUsuario() {
+		return atividadesUsuario;
+	}
+
+	public void setAtividadesUsuario(List<Atividades> atividadesUsuario) {
+		this.atividadesUsuario = atividadesUsuario;
 	}
 	
 }
