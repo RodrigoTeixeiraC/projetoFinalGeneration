@@ -11,6 +11,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -37,13 +39,15 @@ public class Grupo {
 	
 	private String icone;
 	
-	@OneToMany (mappedBy = "grupoInscricao", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
-	private Set<InscricaoGrupo> listaInscricao = new HashSet<>();
+	@OneToMany (mappedBy = "grupoInscricao", cascade = CascadeType.REMOVE)
+	private Set<InscricaoGrupo> listaInscricaoGU = new HashSet<>();
 	
 	@OneToMany (mappedBy = "grupoPostQuiz", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
 	private List<PostagemQuiz> listaPostQuiz = new ArrayList<>();
 	
-	private long idUsuarioCriador;
+	@ManyToOne(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+	@JoinColumn(name = "criador_id")
+	private Usuario criador;
 
 	public long getId() {
 		return id;
@@ -85,14 +89,12 @@ public class Grupo {
 		this.icone = icone;
 	}
 
-	
-
-	public Set<InscricaoGrupo> getListaInscricao() {
-		return listaInscricao;
+	public Set<InscricaoGrupo> getListaInscricaoGU() {
+		return listaInscricaoGU;
 	}
 
-	public void setListaInscricao(Set<InscricaoGrupo> listaInscricao) {
-		this.listaInscricao = listaInscricao;
+	public void setListaInscricaoGU(Set<InscricaoGrupo> listaInscricaoGU) {
+		this.listaInscricaoGU = listaInscricaoGU;
 	}
 
 	public List<PostagemQuiz> getListaPostQuiz() {
@@ -103,12 +105,14 @@ public class Grupo {
 		this.listaPostQuiz = listaPostQuiz;
 	}
 
-	public long getIdUsuarioCriador() {
-		return idUsuarioCriador;
+	public Usuario getCriador() {
+		return criador;
 	}
 
-	public void setIdUsuarioCriador(long idUsuarioCriador) {
-		this.idUsuarioCriador = idUsuarioCriador;
+	public void setCriador(Usuario criador) {
+		this.criador = criador;
 	}
+
+
 
 }
