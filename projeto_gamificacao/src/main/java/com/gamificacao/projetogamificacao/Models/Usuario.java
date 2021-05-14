@@ -211,4 +211,8 @@ public class Usuario {
 	public void setAmigo(Usuario amigo) {
 		this.amigo = amigo;
 	}
+
+	public List<Atividades> getAtividades() {
+		return null;
+	}
 }
