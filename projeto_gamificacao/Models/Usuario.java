@@ -8,7 +8,6 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -63,6 +62,10 @@ public class Usuario {
 	@JsonIgnoreProperties("clan")
 	private Usuario amigo;
 	
+	@OneToMany(mappedBy = "criador")
+	@JsonIgnoreProperties({"criador"})
+	private List<Grupo> gruposCriados = new ArrayList<>();
+	
 	@NotNull
 	private String senha;
 	
@@ -71,8 +74,8 @@ public class Usuario {
 	@NotNull
 	private String avatar; //Substitui icone, verificar com grupo
 	
-	@OneToMany (mappedBy = "usuarioInscricao", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
-	private List<InscricaoGrupo> listaInscricao = new ArrayList<>();
+	@OneToMany (mappedBy = "usuarioInscricao", cascade = CascadeType.REMOVE)
+	private List<InscricaoGrupo> listaInscricaoUG = new ArrayList<>();
 
 	public long getId() {
 		return id;
@@ -196,12 +199,12 @@ public class Usuario {
 		this.avatar = avatar;
 	}
 
-	public List<InscricaoGrupo> getListaInscricao() {
-		return listaInscricao;
+	public List<InscricaoGrupo> getListaInscricaoUG() {
+		return listaInscricaoUG;
 	}
 
-	public void setListaInscricao(List<InscricaoGrupo> listaInscricao) {
-		this.listaInscricao = listaInscricao;
+	public void setListaInscricaoUG(List<InscricaoGrupo> listaInscricaoUG) {
+		this.listaInscricaoUG = listaInscricaoUG;
 	}
 
 	public Usuario getAmigo() {
@@ -214,5 +217,12 @@ public class Usuario {
 
 	public List<Atividades> getAtividades() {
 		return null;
+	}
+	public List<Grupo> getGruposCriados() {
+		return gruposCriados;
+	}
+
+	public void setGruposCriados(List<Grupo> gruposCriados) {
+		this.gruposCriados = gruposCriados;
 	}
 }

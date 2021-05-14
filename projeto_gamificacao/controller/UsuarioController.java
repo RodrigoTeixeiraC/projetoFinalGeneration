@@ -3,6 +3,8 @@ package com.gamificacao.projetogamificacao.controller;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.gamificacao.projetogamificacao.Models.Grupo;
 import com.gamificacao.projetogamificacao.Models.Usuario;
 import com.gamificacao.projetogamificacao.Models.UsuarioLogin;
 import com.gamificacao.projetogamificacao.Repository.UsuarioRepository;
@@ -73,6 +76,17 @@ public class UsuarioController  {
 	public ResponseEntity<Optional<Usuario>> Post(@RequestBody Usuario usuario){
 		return ResponseEntity.status(HttpStatus.CREATED)
 				.body(usuarioService.cadastrarUsuario(usuario));
+	}
+	
+	@PostMapping("/{id_usuario}/novo/grupo")
+	public ResponseEntity<Usuario> novoGrupo(
+			@PathVariable(value = "id_usuario") Long idUsuario,
+			@Valid @RequestBody Grupo novoGrupo){
+		return usuarioService.criarGrupo(novoGrupo, idUsuario)
+				.map(usuarioCriador -> ResponseEntity.status(201).body(usuarioCriador))
+				.orElse(ResponseEntity.status(400).build());
+				
+		
 	}
 }
 
