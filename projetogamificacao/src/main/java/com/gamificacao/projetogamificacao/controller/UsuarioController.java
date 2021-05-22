@@ -21,6 +21,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.gamificacao.projetogamificacao.Models.Grupo;
 import com.gamificacao.projetogamificacao.Models.Usuario;
 import com.gamificacao.projetogamificacao.Models.UsuarioLogin;
+
+import com.gamificacao.projetogamificacao.Repository.GrupoRepository;
+
 import com.gamificacao.projetogamificacao.Repository.UsuarioRepository;
 import com.gamificacao.projetogamificacao.Service.UsuarioService;
 
@@ -35,6 +38,10 @@ public class UsuarioController  {
 	@Autowired
 	private UsuarioService usuarioService;
 	
+
+	@Autowired
+	private GrupoRepository grupoRepository;
+
 	@GetMapping
 	public ResponseEntity<List<Usuario>> getAll(){
 		return ResponseEntity.ok(repositoryUser.findAll());
@@ -88,6 +95,17 @@ public class UsuarioController  {
 				
 		
 	}
+
+	
+	@PostMapping("/inscricao/{id_usuario}/{id_grupo}")
+	public ResponseEntity<?> inscrevendoGrupo(
+		@PathVariable(value = "id_usuario") Long idUsuario,
+		@PathVariable(value = "id_grupo") Long idGrupo){
+		return usuarioService.inscrevendoGrupo(repositoryUser.findById(idUsuario).get(), grupoRepository.findById(idGrupo).get())
+				.map(inscricao -> ResponseEntity.status(201).body(inscricao))
+			.orElse(ResponseEntity.status(400).build());
+	}
+
 }
 
 
