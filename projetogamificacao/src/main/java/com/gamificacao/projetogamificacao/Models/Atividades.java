@@ -23,14 +23,6 @@ public class Atividades {
 	private String atividade;
 	
 	private String status;
-		
-	
-	public Atividades(String atividade, String status, Usuario usuarioAtividade) {
-		super();
-		this.atividade = atividade;
-		this.status = status;
-		this.usuarioAtividade = usuarioAtividade;
-	}
 
 	@ManyToOne
 	@JoinColumn (name = "idUsuario")

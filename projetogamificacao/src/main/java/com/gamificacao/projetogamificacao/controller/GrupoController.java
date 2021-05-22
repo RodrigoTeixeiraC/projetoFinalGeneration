@@ -54,10 +54,6 @@ public class GrupoController {
 		repositoryGrupo.deleteById(id);
 		return ResponseEntity.status(HttpStatus.OK).body(null); 		
 	}
-
-
-}
-
 	
 	@PutMapping("{id_inscricao}/aceito")
 	public ResponseEntity<?> novoIntegrante(
