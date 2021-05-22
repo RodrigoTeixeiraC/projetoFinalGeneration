@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+
+import com.gamificacao.projetogamificacao.Models.Aprovacao;
 import com.gamificacao.projetogamificacao.Models.Atividades;
 import com.gamificacao.projetogamificacao.Models.Grupo;
 import com.gamificacao.projetogamificacao.Models.InscricaoGrupo;
@@ -36,6 +38,7 @@ public class UsuarioService {
 	
 	@Autowired 
 	private InscricaoRepository inscricaorepository;
+
 
 	public Optional<Usuario> cadastrarUsuario(Usuario usuario) {
 
@@ -90,6 +93,15 @@ public class UsuarioService {
 		}).orElse(Optional.empty());
 	}
 
+	public Optional<InscricaoGrupo> inscrevendoGrupo(Usuario novoUsuario, Grupo novoGrupo) {
+		InscricaoGrupo inscricao = new InscricaoGrupo();
+		inscricao.setUsuarioInscricao(novoUsuario);
+		inscricao.setGrupoInscricao(novoGrupo);
+		inscricao.setAprovacao(Aprovacao.AGUARDANDO);
+		return Optional.ofNullable(inscricaoRepository.save(inscricao));
+	}
+
+
 	public Optional<Usuario> aceitarnoGrupo(Grupo novointegrante, Long idGrupo) {
 		return repository.findById(idGrupo).map(GrupoExistente -> {
 			novointegrante.setCriador(GrupoExistente);
@@ -116,7 +128,9 @@ public class UsuarioService {
 
 	public List<PostagemQuiz> buscarPostQuiz (Usuario usuario){
 		
+
 		Optional<List<InscricaoGrupo>> listaInscricao = inscricaorepository.findByUsuarioInscricao(usuario);
+
 		List<Grupo> grupos = new ArrayList<>();
 		List<PostagemQuiz> postagensGrupos = new ArrayList<>();
 				

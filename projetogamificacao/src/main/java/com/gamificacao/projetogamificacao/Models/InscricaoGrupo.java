@@ -2,6 +2,9 @@ package com.gamificacao.projetogamificacao.Models;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,9 +24,11 @@ public class InscricaoGrupo {
 	private long id;
 	
 	@NotNull
-	private enum aprovacao {
-		APROVADO, NEGADO, AGUARDANDO 
-	}
+	@Enumerated (EnumType.STRING)
+	private Aprovacao aprovacao;
+		
+	
+
 	
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
 	@JoinColumn(name = "usuario_id")
@@ -57,4 +62,16 @@ public class InscricaoGrupo {
 	public void setGrupoInscricao(Grupo grupoInscricao) {
 		this.grupoInscricao = grupoInscricao;
 	}
+
+
+
+	public Aprovacao getAprovacao() {
+		return aprovacao;
+	}
+
+	public void setAprovacao(Aprovacao aprovacao) {
+		this.aprovacao = aprovacao;
+	}
+	
+
 }
