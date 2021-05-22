@@ -66,7 +66,8 @@ public class Usuario {
 	@JsonIgnoreProperties({"criador"})
 	private List<Grupo> gruposCriados = new ArrayList<>();
 	
-	@OneToMany(mappedBy = "atividades")
+	@OneToMany(mappedBy = "usuarioAtividade")
+	@JsonIgnoreProperties ("usuarioAtividade")
 	private List<Atividades> atividadesUsuario = new ArrayList<>();
 	
 	@NotNull

@@ -1,6 +1,7 @@
 package com.gamificacao.projetogamificacao.Models;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -26,7 +27,18 @@ public class Atividades {
 	@ManyToOne
 	@JoinColumn (name = "idUsuario")
 	private Usuario usuarioAtividade;
+	
+	public Atividades() {
+	}
 
+	
+	public Atividades(String atividade, String status, Usuario usuarioAtividade) {
+		super();
+		this.atividade = atividade;
+		this.status = status;
+		this.usuarioAtividade = usuarioAtividade;
+	}
+	
 	public long getId_atividades() {
 		return id_atividades;
 	}
