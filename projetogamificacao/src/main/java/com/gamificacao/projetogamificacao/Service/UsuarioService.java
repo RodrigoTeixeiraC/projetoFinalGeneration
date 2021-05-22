@@ -2,9 +2,14 @@ package com.gamificacao.projetogamificacao.Service;
 
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.Function;
+import java.util.stream.Stream;
 
 import org.apache.commons.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +24,7 @@ import com.gamificacao.projetogamificacao.Models.InscricaoGrupo;
 import com.gamificacao.projetogamificacao.Models.PostagemQuiz;
 import com.gamificacao.projetogamificacao.Models.Usuario;
 import com.gamificacao.projetogamificacao.Models.UsuarioLogin;
+import com.gamificacao.projetogamificacao.Repository.AtividadesRepository;
 import com.gamificacao.projetogamificacao.Repository.GrupoRepository;
 import com.gamificacao.projetogamificacao.Repository.InscricaoRepository;
 import com.gamificacao.projetogamificacao.Repository.PostagemQuizRepository;
@@ -32,12 +38,16 @@ public class UsuarioService {
 
 	@Autowired
 	private GrupoRepository repositoryGrupo;
-	
-	@Autowired 
-	private PostagemQuizRepository PostQuizRepository;
-	
-	@Autowired 
+
+	@Autowired
+	private PostagemQuizRepository postQuizRepository;
+
+	@Autowired
 	private InscricaoRepository inscricaorepository;
+
+
+	@Autowired
+	private AtividadesRepository atividadesRepository;
 
 
 	public Optional<Usuario> cadastrarUsuario(Usuario usuario) {
@@ -89,6 +99,9 @@ public class UsuarioService {
 		return repository.findById(idUsuario).map(usuarioExistente -> {
 			novoGrupo.setCriador(usuarioExistente);
 			repositoryGrupo.save(novoGrupo);
+			Atividades atividade = new Atividades(usuarioExistente.getNome()+ " criou o grupo " 
+			+ novoGrupo.getNome(), " ", usuarioExistente);
+			atividadesRepository.save(atividade);
 			return repository.findById(idUsuario);
 		}).orElse(Optional.empty());
 	}
@@ -109,22 +122,9 @@ public class UsuarioService {
 			return repository.findById(idGrupo);
 		}).orElse(Optional.empty());
 	}
-
-	public List<Atividades> buscarAtividades(Usuario usuario) {
-
-		Set<Usuario> listaAmigos = usuario.getClan();
-		List<Atividades> atividades = usuario.getAtividadesUsuario();
-
-		for (Usuario i : listaAmigos) {
-
-			for (Atividades x : atividades) {
-
-				return atividades;
-			}
-		}
-		return null;
-	}
 	
+	
+
 
 	public List<PostagemQuiz> buscarPostQuiz (Usuario usuario){
 		
@@ -145,6 +145,6 @@ public class UsuarioService {
 					.forEach(postagem -> postagensGrupos
 							.add(postagem)));	
 		return postagensGrupos;
-		
 	}
+
 }
