@@ -37,7 +37,7 @@ public class UsuarioService {
 	private PostagemQuizRepository PostQuizRepository;
 	
 	@Autowired 
-	private InscricaoRepository inscricaorepository;
+	private InscricaoRepository inscricaoRepository;
 
 
 	public Optional<Usuario> cadastrarUsuario(Usuario usuario) {
@@ -129,7 +129,7 @@ public class UsuarioService {
 	public List<PostagemQuiz> buscarPostQuiz (Usuario usuario){
 		
 
-		Optional<List<InscricaoGrupo>> listaInscricao = inscricaorepository.findByUsuarioInscricao(usuario);
+		Optional<List<InscricaoGrupo>> listaInscricao = inscricaoRepository.findByUsuarioInscricao(usuario);
 
 		List<Grupo> grupos = new ArrayList<>();
 		List<PostagemQuiz> postagensGrupos = new ArrayList<>();

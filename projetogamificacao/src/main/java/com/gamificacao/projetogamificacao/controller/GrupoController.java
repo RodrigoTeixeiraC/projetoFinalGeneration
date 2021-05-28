@@ -56,7 +56,7 @@ public class GrupoController {
 	}
 
 
-}
+
 
 	
 	@PutMapping("{id_inscricao}/aceito")
