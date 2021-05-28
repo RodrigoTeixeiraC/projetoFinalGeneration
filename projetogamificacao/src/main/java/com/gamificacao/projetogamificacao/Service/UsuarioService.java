@@ -145,5 +145,4 @@ public class UsuarioService {
 							.add(postagem)));	
 		return postagensGrupos;
 	}
-
 }
