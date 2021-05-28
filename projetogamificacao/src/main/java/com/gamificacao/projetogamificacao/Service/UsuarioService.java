@@ -38,12 +38,13 @@ public class UsuarioService {
 
 	@Autowired
 	private GrupoRepository repositoryGrupo;
-	
-	@Autowired 
-	private PostagemQuizRepository PostQuizRepository;
-	
-	@Autowired 
+
+	@Autowired
+	private PostagemQuizRepository postQuizRepository;
+
+	@Autowired
 	private InscricaoRepository inscricaoRepository;
+
 
 	@Autowired
 	private AtividadesRepository atividadesRepository;
@@ -122,9 +123,6 @@ public class UsuarioService {
 		}).orElse(Optional.empty());
 	}
 	
-	
-
-
 	public List<PostagemQuiz> buscarPostQuiz (Usuario usuario){
 		
 
@@ -145,4 +143,5 @@ public class UsuarioService {
 							.add(postagem)));	
 		return postagensGrupos;
 	}
+
 }

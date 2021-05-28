@@ -24,19 +24,19 @@ public class Atividades {
 	
 	private String status;
 		
+	@ManyToOne
+	@JoinColumn (name = "idUsuario")
+	private Usuario usuarioAtividade;
+	
+	public Atividades() {
+	}
+
 	
 	public Atividades(String atividade, String status, Usuario usuarioAtividade) {
 		super();
 		this.atividade = atividade;
 		this.status = status;
 		this.usuarioAtividade = usuarioAtividade;
-	}
-
-	@ManyToOne
-	@JoinColumn (name = "idUsuario")
-	private Usuario usuarioAtividade;
-	
-	public Atividades() {
 	}
 	
 	public long getId_atividades() {
