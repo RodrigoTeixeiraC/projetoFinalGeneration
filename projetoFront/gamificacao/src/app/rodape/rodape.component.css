@@ -1,0 +1,19 @@
+ul.social-network
+{
+   list-style: none;
+   padding: 0px;
+}
+
+.fa
+{
+    font-size: 30pt;
+    color: white;
+    padding: 10px;
+}
+
+ul.social-network li
+{
+   display: inline;
+   margin: 0;
+   padding: 5px;
+}
