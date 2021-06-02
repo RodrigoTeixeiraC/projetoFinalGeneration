@@ -1,0 +1,4 @@
+export class Inscrição Grupo{
+    public id: number
+    public aprovacao: string
+}

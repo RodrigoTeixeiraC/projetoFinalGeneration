@@ -1,0 +1,6 @@
+export class Aprovação Amigos{
+    public id: number
+    public APROVADO: string
+    public NEGADO: string
+    public AGUARDANDO: string
+}

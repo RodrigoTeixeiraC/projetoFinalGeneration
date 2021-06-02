@@ -1,0 +1,12 @@
+export class usuario{
+    public id: number
+    public usuario: string
+    public nome: string
+    public sobrenome: string
+    puclic email: string
+    public celular: number
+    public dataNascimento: date
+    puclic senha: string
+    public foto: string
+    public avatar: string
+}

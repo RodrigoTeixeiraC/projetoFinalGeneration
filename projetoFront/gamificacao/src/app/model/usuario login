@@ -1,0 +1,5 @@
+esport class usuarioLogin{
+    public usuario: string
+    puclic senha: string
+    public token: string
+}
