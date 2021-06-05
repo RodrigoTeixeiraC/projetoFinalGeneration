@@ -1,5 +1,0 @@
-export class Aprovação{
-    public APROVADO: string
-    public NEGADO: string
-    public AGUARDANDO: string
-}

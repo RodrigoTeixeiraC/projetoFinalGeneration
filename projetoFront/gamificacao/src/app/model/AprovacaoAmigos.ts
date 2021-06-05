@@ -1,4 +1,4 @@
-export class Inscrição Grupo{
+export class AprovacaoAmigos{
     public id: number
     public aprovacao: string
 }

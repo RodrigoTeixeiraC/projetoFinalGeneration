@@ -1,6 +1,0 @@
-export class Atividades{
-    public id: number
-    public data: data
-    public atividade: string
-    pupulic status: string
-}

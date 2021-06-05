@@ -1,5 +1,5 @@
-esport class usuarioLogin{
+export class UsuarioLogin{
     public usuario: string
-    puclic senha: string
+    public senha: string
     public token: string
 }
