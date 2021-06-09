@@ -45,13 +45,13 @@ public class Usuario {
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	private LocalDate dataNascimento;
 	
-	private int responsabilidadePessoal; //Discutir se será NotNull
+	private int responsabilidadePessoal;
 	
-	private int mentalidadeCrescimento;//Discutir se será NotNull
+	private int mentalidadeCrescimento;
 	
-	private int atencaoDetalhes;//Discutir se será NotNull
+	private int atencaoDetalhes;
 	
-	private int persistencia;//Discutir se será NotNull
+	private int persistencia;
 	
 	private int comunicacao;
 	
@@ -223,13 +223,6 @@ public class Usuario {
 		this.atividadesUsuario = atividadesUsuario;
 	}
 
-	public List<AprovacaoAmigos> getAprovacao() {
-		return aprovacao;
-	}
-
-	public void setAprovacao(List<AprovacaoAmigos> aprovacao) {
-		this.aprovacao = aprovacao;
-	}
 
 	public List<Tarefa> getListaTarefas() {
 		return listaTarefas;
@@ -239,13 +232,6 @@ public class Usuario {
 		this.listaTarefas = listaTarefas;
 	}
 
-	public List<AprovacaoAmigos> getMeusPedidosAmizade() {
-		return meusPedidosAmizade;
-	}
-
-	public void setMeusPedidosAmizade(List<AprovacaoAmigos> meusPedidosAmizade) {
-		this.meusPedidosAmizade = meusPedidosAmizade;
-	}
 
 	public int getAtencaoDetalhes() {
 		return atencaoDetalhes;
@@ -294,6 +280,23 @@ public class Usuario {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
+
+	public List<AprovacaoAmigos> getAprovacao() {
+		return aprovacao;
+	}
+
+	public void setAprovacao(List<AprovacaoAmigos> aprovacao) {
+		this.aprovacao = aprovacao;
+	}
+
+	public List<AprovacaoAmigos> getMeusPedidosAmizade() {
+		return meusPedidosAmizade;
+	}
+
+	public void setMeusPedidosAmizade(List<AprovacaoAmigos> meusPedidosAmizade) {
+		this.meusPedidosAmizade = meusPedidosAmizade;
+	}
+	
 	
 	
 	

@@ -31,16 +31,14 @@ public class TarefasController {
 	private @Autowired TarefaRepository tarefaRepository;
 	
 	@GetMapping
-	public ResponseEntity<List<Tarefa>> getAll(){
+	public ResponseEntity<List<Tarefa>> getAllTarefas(){
 		return ResponseEntity.ok(tarefaRepository.findAll());
 	}
-	
 	@GetMapping ("/{id}")
 	public ResponseEntity<Tarefa> getTarefaById (@PathVariable long id){
 		return tarefaRepository.findById(id).map(tarefa -> ResponseEntity.ok(tarefa))
 				.orElse(ResponseEntity.notFound().build());
 	}
-	
 	@PostMapping("/{id}")
 	public ResponseEntity<?> adicionarTarefa(
 			@Valid @RequestBody Tarefa tarefa, 
@@ -50,17 +48,14 @@ public class TarefasController {
 						.body(tarefaCriada))
 				.orElse(ResponseEntity.status(400).build());	
 	}
-	
 	@PutMapping
 	public ResponseEntity<?> editarTarefa(@Valid @RequestBody Tarefa tarefaEditada){
 		return ResponseEntity.status(HttpStatus.OK).body(tarefaRepository.save(tarefaEditada));
 	}
-	
 	@DeleteMapping("/{id}")
 	public void delete (@PathVariable long id) {
 		tarefaRepository.deleteById(id);
-	}
-		
+	}	
 	@PutMapping("/confirmar/{id}")
 	public ResponseEntity<?> confirmarTarefa (
 			@PathVariable(value = "id") Long id){
@@ -68,6 +63,5 @@ public class TarefasController {
 				.map(confirmada -> ResponseEntity.status(HttpStatus.OK)
 						.body(confirmada))
 				.orElse(ResponseEntity.status(400).build());
-	}
-	
+	}	
 }

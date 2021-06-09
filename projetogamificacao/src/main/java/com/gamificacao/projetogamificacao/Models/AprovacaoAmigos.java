@@ -18,7 +18,7 @@ public class AprovacaoAmigos {
 	
 	@NotNull
 	@Enumerated (EnumType.STRING)
-	private Aprovacao aprovacao;
+	private Aprovacao aprovacaoEnum;
 
 	@ManyToOne
 	private Usuario usuarioPrincipal;
@@ -57,14 +57,17 @@ public class AprovacaoAmigos {
 	}
 
 
-	public Aprovacao getAprovacao() {
-		return aprovacao;
+	public Aprovacao getAprovacaoEnum() {
+		return aprovacaoEnum;
 	}
 
 
-	public void setAprovacao(Aprovacao aprovacao) {
-		this.aprovacao = aprovacao;
+	public void setAprovacaoEnum(Aprovacao aprovacaoEnum) {
+		this.aprovacaoEnum = aprovacaoEnum;
 	}
+
+
+	
 	
 	
 }

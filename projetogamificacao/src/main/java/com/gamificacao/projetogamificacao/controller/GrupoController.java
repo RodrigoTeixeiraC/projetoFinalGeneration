@@ -27,47 +27,35 @@ import com.gamificacao.projetogamificacao.Service.GrupoService;
 public class GrupoController {
 	
 	private @Autowired GrupoRepository repositoryGrupo;
-	
 	private @Autowired GrupoService serviceGrupo;
-	
 
 	@GetMapping("/buscar/todos")
-	public ResponseEntity<List<Grupo>> getAll(){
+	public ResponseEntity<List<Grupo>> getAllGrupos(){
 		return ResponseEntity.status(HttpStatus.OK).body(repositoryGrupo.findAll());
 	}
-	
 	@GetMapping("/buscar/{id}")
-	public ResponseEntity<?> getById(@Valid @PathVariable long id){
+	public ResponseEntity<?> getGrupoById(@Valid @PathVariable long id){
 		return repositoryGrupo.findById(id)
 				.map(grupo -> ResponseEntity.ok(grupo))
 				.orElse(ResponseEntity.notFound().build());
 	}
-	
 	@DeleteMapping("/apagar/{id}")
-	public ResponseEntity<?> deleteById(@Valid @PathVariable long id){
+	public ResponseEntity<?> deleteGrupoById(@Valid @PathVariable long id){
 		repositoryGrupo.deleteById(id);
 		return ResponseEntity.status(HttpStatus.OK).body(null); 		
 	}
-	
 	@PutMapping("{id_inscricao}/aceito")
-	public ResponseEntity<?> novoIntegrante(
+	public ResponseEntity<?> aceitarInscricao(
 			@PathVariable (value= "id_inscricao") Long idInscricao)
 			{ serviceGrupo.aceitarUsuario(idInscricao);
 				return ResponseEntity.status(HttpStatus.OK).body((Aprovacao.APROVADO));
 	}
 	@PutMapping("/rejeitar/{id}")
-	public ResponseEntity<Aprovacao>  negarInscricao(@PathVariable( value="id") Long id){
+	public ResponseEntity<Aprovacao> negarInscricao(@PathVariable( value="id") Long id){
 		serviceGrupo.rejeitarUsuario(id);
 		return ResponseEntity.status(HttpStatus.OK).body(Aprovacao.NEGADO); 
 		
 	}
-	
-	@DeleteMapping("/delete/{id_grupo}")
-	public void deletarGrupo(Long idGrupo) {
-		repositoryGrupo.deleteById(idGrupo);
-	}
-	
-	
-		}
+}
 
 

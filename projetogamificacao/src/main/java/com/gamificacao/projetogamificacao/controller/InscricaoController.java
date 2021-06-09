@@ -24,34 +24,27 @@ import com.gamificacao.projetogamificacao.Repository.InscricaoRepository;
 @CrossOrigin("*")
 public class InscricaoController {
 
-	@Autowired
-	private InscricaoRepository repository;
+	private @Autowired InscricaoRepository repository;
 
 	@GetMapping
-	public ResponseEntity<List<InscricaoGrupo>> getAll() {
+	public ResponseEntity<List<InscricaoGrupo>> getAllInscricao() {
 		return ResponseEntity.ok(repository.findAll());
 	}
-
 	@GetMapping("/id/{id}")
-	public ResponseEntity<InscricaoGrupo> GetById(@PathVariable Long id) {
-
+	public ResponseEntity<InscricaoGrupo> getInsgricaoById(@PathVariable Long id) {
 		return repository.findById(id).map(inscricao -> ResponseEntity.ok(inscricao))
 				.orElse(ResponseEntity.notFound().build());
 	}
-
 	@PostMapping
-	public ResponseEntity<InscricaoGrupo> post(@RequestBody InscricaoGrupo inscricao) {
+	public ResponseEntity<InscricaoGrupo> postInscricao(@RequestBody InscricaoGrupo inscricao) {
 		return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(inscricao));
 	}
-
 	@PutMapping
-	public ResponseEntity<InscricaoGrupo> put(@RequestBody InscricaoGrupo inscricao) {
+	public ResponseEntity<InscricaoGrupo> putInscricao(@RequestBody InscricaoGrupo inscricao) {
 		return ResponseEntity.ok(repository.save(inscricao));
 	}
-
 	@DeleteMapping("/{id}")
-	public void delete(@PathVariable long id) {
+	public void deleteInscricao(@PathVariable long id) {
 		repository.deleteById(id);
 	}
-
 }

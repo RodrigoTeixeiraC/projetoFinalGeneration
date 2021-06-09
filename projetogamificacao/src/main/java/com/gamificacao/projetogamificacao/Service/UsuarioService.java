@@ -28,58 +28,36 @@ import com.gamificacao.projetogamificacao.Repository.UsuarioRepository;
 @Service
 public class UsuarioService {
 
-	@Autowired
-	private UsuarioRepository repository;
-
-	@Autowired
-	private GrupoRepository repositoryGrupo;
-
-	@Autowired
-	private InscricaoRepository inscricaoRepository;
-
-
-	@Autowired
-	private AtividadesRepository atividadesRepository;
-	
-	@Autowired
-	private AprovacaoAmigosRepository aprovacaoAmigosRepository;
-
+	private @Autowired UsuarioRepository repository;
+	private @Autowired GrupoRepository repositoryGrupo;
+	private @Autowired InscricaoRepository inscricaoRepository;
+	private @Autowired AtividadesRepository atividadesRepository;
+	private @Autowired AprovacaoAmigosRepository aprovacaoAmigosRepository;
 
 	public Optional<Usuario> cadastrarUsuario(Usuario usuario) {
-
 		Optional<Usuario> usuarioExistente = repository.findByUsuarioOrEmail(usuario.getUsuario(), usuario.getEmail());
-
 		if (usuarioExistente.isPresent()) {
 			return Optional.empty();
 		} else {
 			BCryptPasswordEncoder ecoder = new BCryptPasswordEncoder();
-
 			String senhaEcoder = ecoder.encode(usuario.getSenha());
 			usuario.setSenha(senhaEcoder);
-
 			return Optional.ofNullable(repository.save(usuario));
 		}
 	}
-
-	public Optional<UsuarioLogin> Logar(Optional<UsuarioLogin> user) {
+	public Optional<UsuarioLogin> logar(Optional<UsuarioLogin> user) {
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		Optional<Usuario> usuario = repository.findByUsuarioOrEmail(user.get().getUsuario(), user.get().getUsuario());
-
 		if (usuario.isPresent()) {
-			if (encoder.matches(user.get().getSenha(), usuario.get().getSenha()))
-				;
-
+			if (encoder.matches(user.get().getSenha(), usuario.get().getSenha()));
 			String auth = user.get().getUsuario() + ":" + user.get().getSenha();
 			byte[] encodeAuth = Base64.encodeBase64(auth.getBytes(Charset.forName("US-ASCII")));
 			String authHeader = "Basic " + new String(encodeAuth);
-
 			user.get().setToken(authHeader);
-
 			return user;
 		}
 		return null;
 	}
-
 	/**
 	 * Cria um Grupo e seta o usuario existente como seu criador
 	 * 
@@ -100,7 +78,6 @@ public class UsuarioService {
 			return repository.findById(idUsuario);
 		}).orElse(Optional.empty());
 	}
-
 	public Optional<InscricaoGrupo> inscrevendoGrupo(Usuario novoUsuario, Grupo novoGrupo) {
 		InscricaoGrupo inscricao = new InscricaoGrupo();
 		inscricao.setUsuarioInscricao(novoUsuario);
@@ -108,23 +85,18 @@ public class UsuarioService {
 		inscricao.setAprovacao(Aprovacao.AGUARDANDO);
 		return Optional.ofNullable(inscricaoRepository.save(inscricao));
 	}
-
-
 	public Optional<InscricaoGrupo> aceitarNoGrupo(InscricaoGrupo inscricao) {
 		inscricao.setAprovacao(Aprovacao.APROVADO);
 		return Optional.ofNullable(inscricaoRepository.save(inscricao));
 	}
-	
 	public Optional<InscricaoGrupo> NegarNoGrupo(InscricaoGrupo inscricao) {
 		inscricao.setAprovacao(Aprovacao.NEGADO);
 		return Optional.ofNullable(inscricaoRepository.save(inscricao));
 	}
-	
 	public List<PostagemQuiz> buscarPostQuiz (Usuario usuario){
 		Optional<List<InscricaoGrupo>> listaInscricao = inscricaoRepository.findByUsuarioInscricao(usuario);
 		List<Grupo> grupos = new ArrayList<>();
-		List<PostagemQuiz> postagensGrupos = new ArrayList<>();
-				
+		List<PostagemQuiz> postagensGrupos = new ArrayList<>();		
 		listaInscricao
 			.get()
 			.stream()
@@ -137,25 +109,26 @@ public class UsuarioService {
 							.add(postagem)));	
 		return postagensGrupos;
 	}
-	
-	
-	Optional<AprovacaoAmigos> pedirAmizade(Usuario usuarioPedindo, Usuario UsuarioPrincipal){
+	public Optional<AprovacaoAmigos> pedirAmizade(Usuario usuarioPedindo, Usuario UsuarioPrincipal){
 		AprovacaoAmigos aprovacao = new AprovacaoAmigos();
-		
 		aprovacao.setUsuarioPedindo(usuarioPedindo);
 		aprovacao.setUsuarioPrincipal(UsuarioPrincipal);
-		aprovacao.setAprovacao(Aprovacao.AGUARDANDO);
+		aprovacao.setAprovacaoEnum(Aprovacao.AGUARDANDO);
 		return Optional.ofNullable(aprovacaoAmigosRepository.save(aprovacao));
 	}
-	
-	Optional<AprovacaoAmigos> aceitarAmizade(AprovacaoAmigos aprovacao){
-		aprovacao.setAprovacao(Aprovacao.APROVADO);
+	public Optional<AprovacaoAmigos> aceitarAmizade(AprovacaoAmigos aprovacao){
+		aprovacao.setAprovacaoEnum(Aprovacao.APROVADO);
 		return Optional.ofNullable(aprovacaoAmigosRepository.save(aprovacao));
 	}
-	
-	Optional<AprovacaoAmigos> negarAmizade(AprovacaoAmigos aprovacao){
-		aprovacao.setAprovacao(Aprovacao.NEGADO);
+	public Optional<AprovacaoAmigos> negarAmizade(AprovacaoAmigos aprovacao){
+		aprovacao.setAprovacaoEnum(Aprovacao.NEGADO);
 		return Optional.ofNullable(aprovacaoAmigosRepository.save(aprovacao));
 	}
-
+	public Optional<Usuario> responderQuiz(Long id, PostagemQuiz postQuiz){
+		repository.findById(id).get().getQuizRespondido().add(postQuiz);
+		return Optional.ofNullable(repository.save(repository.findById(id).get()));
+	}
+	public List<AprovacaoAmigos> listaAprovacaoAmigos(Usuario usuario){
+		return aprovacaoAmigosRepository.findByUsuarioPrincipal(usuario);
+	}
 }

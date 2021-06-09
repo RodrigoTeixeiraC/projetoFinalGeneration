@@ -23,9 +23,7 @@ public class Tarefa {
 	@NotBlank
 	private String descricao;
 	
-	
 	private Boolean status;
-	
 	
 	@ManyToOne
 	@JsonIgnoreProperties({"listaTarefas", "atividadesUsuario"})

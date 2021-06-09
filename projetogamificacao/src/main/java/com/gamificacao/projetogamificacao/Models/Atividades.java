@@ -13,6 +13,14 @@ import javax.persistence.TemporalType;
 @Entity
 public class Atividades {
 	
+	public Atividades() {
+	}
+	public Atividades(String atividade, Usuario usuarioAtividade) {
+		super();
+		this.atividade = atividade;
+		this.usuarioAtividade = usuarioAtividade;
+	}
+	
 	private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) long id_atividades;
 	
 	@Temporal(TemporalType.TIMESTAMP)
@@ -23,16 +31,6 @@ public class Atividades {
 	@ManyToOne
 	@JoinColumn (name = "idUsuario")
 	private Usuario usuarioAtividade;
-	
-	public Atividades() {
-	}
-
-	
-	public Atividades(String atividade, Usuario usuarioAtividade) {
-		super();
-		this.atividade = atividade;
-		this.usuarioAtividade = usuarioAtividade;
-	}
 	
 	public long getId_atividades() {
 		return id_atividades;

@@ -18,7 +18,6 @@ public class TarefasService {
 	private @Autowired UsuarioRepository usuarioRepository;
 	private @Autowired AtividadesRepository atividadeRepository;
 	
-	
 	/**
 	 * Cria uma tarefa e adiciona a atividades uma nova atividade do usuario.
 	 * 
@@ -38,8 +37,6 @@ public class TarefasService {
 					return Optional.ofNullable(tarefaRepository.save(novaTarefa));
 				}).orElse(Optional.empty());
 	}
-	
-	
 	/**
 	 * Confirma uma tarefa muda seu status para true.
 	 * 
@@ -57,5 +54,4 @@ public class TarefasService {
 				return Optional.of(tarefa);
 				}).orElse(Optional.empty());
 	}
-	
 }
