@@ -9,6 +9,7 @@ import { RodapeComponent } from './rodape/rodape.component';
 import { LoginComponent } from './login/login.component';
 import { CadastrarComponent } from './cadastrar/cadastrar.component';
 import { FormsModule } from '@angular/forms';
+import { PerfilComponent } from './perfil/perfil.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { FormsModule } from '@angular/forms';
     MenuComponent,
     RodapeComponent,
     LoginComponent,
-    CadastrarComponent
+    CadastrarComponent,
+    PerfilComponent,
   ],
   imports: [
     BrowserModule,
