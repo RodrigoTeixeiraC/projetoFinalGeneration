@@ -28,7 +28,7 @@ public class PostagemQuizController {
 	private @Autowired PostagemQuizRepository repository;
 	private @Autowired UsuarioService usuarioService;
 	
-	@GetMapping("/todas") 
+	@GetMapping 
 	public ResponseEntity<List<PostagemQuiz>> getAllPostagens(){
 		return ResponseEntity.ok(repository.findAll());
 	}

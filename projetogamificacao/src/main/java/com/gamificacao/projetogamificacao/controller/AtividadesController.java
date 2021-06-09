@@ -38,7 +38,7 @@ public class AtividadesController {
 	public Optional<Atividades> getAtividadeById (@PathVariable Long id_atividades){
 		return atividadesRepository.findById(id_atividades);
 	}	
-	@GetMapping ("/todas")
+	@GetMapping
 	public Optional<List<Atividades>> getAllAtividades(){
 		return Optional.ofNullable(atividadesRepository.findAll());
 	}
