@@ -100,8 +100,11 @@ public class UsuarioService {
 		listaInscricao
 			.get()
 			.stream()
-			.forEach(grupo -> grupos
-					.add(grupo.getGrupoInscricao()));	
+			.forEach(grupo -> {
+				if(grupo.getAprovacao().equals(Aprovacao.APROVADO)) {
+					grupos.add(grupo.getGrupoInscricao());
+				}	
+			});	
 		grupos
 			.forEach(listaPostagens -> listaPostagens
 					.getListaPostQuiz()
