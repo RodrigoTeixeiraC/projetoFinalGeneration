@@ -1,6 +1,8 @@
 package com.gamificacao.projetogamificacao.Models;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -9,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -52,6 +55,9 @@ public class PostagemQuiz {
 	@ManyToOne 
 	@JoinColumn
 	private Grupo grupoPostQuiz;
+	
+	@ManyToMany(mappedBy = "quizRespondido")
+	private List<Usuario> usuariosQueResponderam = new ArrayList<Usuario>();
 
 	public long getId() {
 		return id;
@@ -124,4 +130,14 @@ public class PostagemQuiz {
 	public void setGrupoPostQuiz(Grupo grupoPostQuiz) {
 		this.grupoPostQuiz = grupoPostQuiz;
 	}
+
+	public List<Usuario> getUsuariosQueResponderam() {
+		return usuariosQueResponderam;
+	}
+
+	public void setUsuariosQueResponderam(List<Usuario> usuariosQueResponderam) {
+		this.usuariosQueResponderam = usuariosQueResponderam;
+	}
+	
+	
 }

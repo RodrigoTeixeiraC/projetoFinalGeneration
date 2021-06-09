@@ -6,7 +6,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -24,9 +23,7 @@ public class Tarefa {
 	@NotBlank
 	private String descricao;
 	
-	
 	private Boolean status;
-	
 	
 	@ManyToOne
 	@JsonIgnoreProperties({"listaTarefas", "atividadesUsuario"})

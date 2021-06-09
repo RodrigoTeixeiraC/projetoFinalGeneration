@@ -1,8 +1,6 @@
 package com.gamificacao.projetogamificacao.Models;
 
 import java.util.Date;
-import java.util.List;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,29 +13,24 @@ import javax.persistence.TemporalType;
 @Entity
 public class Atividades {
 	
+	public Atividades() {
+	}
+	public Atividades(String atividade, Usuario usuarioAtividade) {
+		super();
+		this.atividade = atividade;
+		this.usuarioAtividade = usuarioAtividade;
+	}
+	
 	private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) long id_atividades;
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date data_atividades = new java.sql.Date(System.currentTimeMillis());
 	
 	private String atividade;
-	
-	private String status;
 		
 	@ManyToOne
 	@JoinColumn (name = "idUsuario")
 	private Usuario usuarioAtividade;
-	
-	public Atividades() {
-	}
-
-	
-	public Atividades(String atividade, String status, Usuario usuarioAtividade) {
-		super();
-		this.atividade = atividade;
-		this.status = status;
-		this.usuarioAtividade = usuarioAtividade;
-	}
 	
 	public long getId_atividades() {
 		return id_atividades;
@@ -71,11 +64,4 @@ public class Atividades {
 		this.atividade = atividade;
 	}
 
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
 }
