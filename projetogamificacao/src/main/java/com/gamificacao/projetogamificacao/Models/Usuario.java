@@ -82,6 +82,7 @@ public class Usuario {
 	private String avatar; //Substitui icone, verificar com grupo
 	
 	@OneToMany (mappedBy = "usuarioInscricao", cascade = CascadeType.REMOVE)
+	@JsonIgnoreProperties("usuarioInscricao")
 	private List<InscricaoGrupo> listaInscricaoUG = new ArrayList<>();
 	
 	@OneToMany (mappedBy = "usuarioResponsavel", cascade = CascadeType.REMOVE)

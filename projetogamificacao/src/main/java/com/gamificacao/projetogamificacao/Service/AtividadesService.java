@@ -11,12 +11,10 @@ import com.gamificacao.projetogamificacao.Models.AprovacaoAmigos;
 import com.gamificacao.projetogamificacao.Models.Atividades;
 import com.gamificacao.projetogamificacao.Models.Usuario;
 import com.gamificacao.projetogamificacao.Repository.AtividadesRepository;
-import com.gamificacao.projetogamificacao.Repository.UsuarioRepository;
 
 @Service
 public class AtividadesService {
 
-	private @Autowired UsuarioRepository usuarioRepository;
 	private @Autowired AtividadesRepository atividadesRepository;
 
 	/**
@@ -29,12 +27,8 @@ public class AtividadesService {
 	*@since 1.0
 	*@author Allan 
 	*/
-		public Optional<Usuario> criarAtividade (Long idUsuario, Atividades atividades){
-		return usuarioRepository.findById(idUsuario).map(usuarioExistente -> {
-			atividades.setUsuarioAtividade(usuarioExistente);
-			atividadesRepository.save(atividades);
-			return usuarioRepository.findById(idUsuario);
-		}).orElse(Optional.empty());
+		public Optional<Atividades> criarAtividade (Atividades atividades){
+		return Optional.ofNullable(atividadesRepository.save(atividades));
 	}
 	/**
 	* Pegar todas as atividades dos amigos 

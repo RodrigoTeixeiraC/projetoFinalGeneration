@@ -50,11 +50,9 @@ public class AtividadesController {
 	public List<PostagemQuiz> getPostQuizByUser(Usuario user){
 		return usuarioService.buscarPostQuiz(user);
 	}	
-	@PostMapping ("/{idUsuario}") 
-	public ResponseEntity<Optional<Usuario>> postAtividade(
-			@PathVariable(value = "idUsuario") Long idUsuario,
-			@Valid @RequestBody Atividades status){
-		return ResponseEntity.status(201).body(atividadesService.criarAtividade(idUsuario, status));
+	@PostMapping
+	public ResponseEntity<Optional<Atividades>> postAtividade(@Valid @RequestBody Atividades status){
+		return ResponseEntity.status(201).body(atividadesService.criarAtividade(status));
 	}
 	public @PutMapping("/editar-status") 
 	ResponseEntity<Atividades> editarAtividade(@RequestBody Atividades novaAtividade){
