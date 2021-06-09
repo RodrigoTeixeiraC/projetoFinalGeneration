@@ -12,11 +12,8 @@ import com.gamificacao.projetogamificacao.Models.Grupo;
 @Repository
 public interface GrupoRepository extends JpaRepository<Grupo, Long> {
 	
-	public List<Grupo> findByCriador_id (Long criador_id);
-
-
+	List<Grupo> findByCriador_id (Long criador_id);
 	
 	List<Grupo> findByNomeContainingIgnoreCase(String nome);
-
 
 }

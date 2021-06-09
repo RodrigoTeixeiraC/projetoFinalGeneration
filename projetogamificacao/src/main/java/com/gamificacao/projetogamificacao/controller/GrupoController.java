@@ -11,20 +11,14 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.gamificacao.projetogamificacao.Models.Grupo;
 import com.gamificacao.projetogamificacao.Repository.GrupoRepository;
-
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+
 
 import com.gamificacao.projetogamificacao.Models.Aprovacao;
-import com.gamificacao.projetogamificacao.Models.Grupo;
-import com.gamificacao.projetogamificacao.Repository.GrupoRepository;
 import com.gamificacao.projetogamificacao.Service.GrupoService;
 
 @RestController
@@ -67,11 +61,13 @@ public class GrupoController {
 		return ResponseEntity.status(HttpStatus.OK).body(Aprovacao.NEGADO); 
 		
 	}
-	@DeleteMapping("/delete/{id_grupo}")
 	
+	@DeleteMapping("/delete/{id_grupo}")
 	public void deletarGrupo(Long idGrupo) {
 		repositoryGrupo.deleteById(idGrupo);
 	}
+	
+	
 		}
 
 

@@ -33,10 +33,9 @@ public class TarefasService {
 		return usuarioRepository.findById(idUsuario)
 				.map(usuario -> {
 					novaTarefa.setUsuarioResponsavel(usuario);
-					Atividades atividade = new Atividades("teste", "teste", usuario);
+					Atividades atividade = new Atividades("teste", usuario);
 					atividadeRepository.save(atividade);
-					tarefaRepository.save(novaTarefa);
-					return tarefaRepository.findById(novaTarefa.getId());
+					return Optional.ofNullable(tarefaRepository.save(novaTarefa));
 				}).orElse(Optional.empty());
 	}
 	

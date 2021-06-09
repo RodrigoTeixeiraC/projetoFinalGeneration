@@ -1,6 +1,8 @@
 package com.gamificacao.projetogamificacao.Models;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -15,9 +17,8 @@ public class AprovacaoAmigos {
 	private long id;
 	
 	@NotNull
-	private enum aprovacao {
-		APROVADO, NEGADO, AGUARDANDO 
-	}
+	@Enumerated (EnumType.STRING)
+	private Aprovacao aprovacao;
 
 	@ManyToOne
 	private Usuario usuarioPrincipal;
@@ -53,6 +54,16 @@ public class AprovacaoAmigos {
 
 	public void setUsuarioPedindo(Usuario usuarioPedindo) {
 		this.usuarioPedindo = usuarioPedindo;
+	}
+
+
+	public Aprovacao getAprovacao() {
+		return aprovacao;
+	}
+
+
+	public void setAprovacao(Aprovacao aprovacao) {
+		this.aprovacao = aprovacao;
 	}
 	
 	

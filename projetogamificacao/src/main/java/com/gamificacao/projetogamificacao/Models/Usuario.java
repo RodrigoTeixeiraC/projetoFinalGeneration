@@ -2,16 +2,14 @@ package com.gamificacao.projetogamificacao.Models;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -51,16 +49,15 @@ public class Usuario {
 	
 	private int mentalidadeCrescimento;//Discutir se será NotNull
 	
-	private int orientacaoFuturo;//Discutir se será NotNull
+	private int atencaoDetalhes;//Discutir se será NotNull
 	
 	private int persistencia;//Discutir se será NotNull
 	
-	@OneToMany(mappedBy = "amigo", cascade = CascadeType.REMOVE)
-	private Set<Usuario> clan = new HashSet<Usuario>();
+	private int comunicacao;
 	
-	@ManyToOne
-	@JsonIgnoreProperties("clan")
-	private Usuario amigo;
+	private int planejamento;
+	
+	private int proatividade;
 	
 	@OneToMany (mappedBy = "usuarioPrincipal", cascade = CascadeType.REMOVE)
 	private List<AprovacaoAmigos> aprovacao = new ArrayList<>();
@@ -73,9 +70,7 @@ public class Usuario {
 	private List<Grupo> gruposCriados = new ArrayList<>();
 	
 	@OneToMany(mappedBy = "usuarioAtividade")
-
 	@JsonIgnoreProperties ("usuarioAtividade")
-
 	private List<Atividades> atividadesUsuario = new ArrayList<>();
 	
 	@NotNull
@@ -91,6 +86,11 @@ public class Usuario {
 	
 	@OneToMany (mappedBy = "usuarioResponsavel", cascade = CascadeType.REMOVE)
 	private List<Tarefa> listaTarefas = new ArrayList<>();
+	
+	@ManyToMany
+	private List<PostagemQuiz> quizRespondido = new ArrayList<PostagemQuiz>();
+	
+	private String descricao;
 
 	public long getId() {
 		return id;
@@ -166,28 +166,12 @@ public class Usuario {
 		this.mentalidadeCrescimento = mentalidadeCrescimento;
 	}
 
-	public int getOrientacaoFuturo() {
-		return orientacaoFuturo;
-	}
-
-	public void setOrientacaoFuturo(int orientacaoFuturo) {
-		this.orientacaoFuturo = orientacaoFuturo;
-	}
-
 	public int getPersistencia() {
 		return persistencia;
 	}
 
 	public void setPersistencia(int persistencia) {
 		this.persistencia = persistencia;
-	}
-
-	public Set<Usuario> getClan() {
-		return clan;
-	}
-
-	public void setClan(Set<Usuario> clan) {
-		this.clan = clan;
 	}
 
 	public String getSenha() {
@@ -222,13 +206,6 @@ public class Usuario {
 		this.listaInscricaoUG = listaInscricaoUG;
 	}
 
-	public Usuario getAmigo() {
-		return amigo;
-	}
-
-	public void setAmigo(Usuario amigo) {
-		this.amigo = amigo;
-	}
 
 	public List<Grupo> getGruposCriados() {
 		return gruposCriados;
@@ -268,6 +245,54 @@ public class Usuario {
 
 	public void setMeusPedidosAmizade(List<AprovacaoAmigos> meusPedidosAmizade) {
 		this.meusPedidosAmizade = meusPedidosAmizade;
+	}
+
+	public int getAtencaoDetalhes() {
+		return atencaoDetalhes;
+	}
+
+	public void setAtencaoDetalhes(int atencaoDetalhes) {
+		this.atencaoDetalhes = atencaoDetalhes;
+	}
+
+	public int getComunicacao() {
+		return comunicacao;
+	}
+
+	public void setComunicacao(int comunicacao) {
+		this.comunicacao = comunicacao;
+	}
+
+	public int getPlanejamento() {
+		return planejamento;
+	}
+
+	public void setPlanejamento(int planejamento) {
+		this.planejamento = planejamento;
+	}
+
+	public int getProatividade() {
+		return proatividade;
+	}
+
+	public void setProatividade(int proatividade) {
+		this.proatividade = proatividade;
+	}
+
+	public List<PostagemQuiz> getQuizRespondido() {
+		return quizRespondido;
+	}
+
+	public void setQuizRespondido(List<PostagemQuiz> quizRespondido) {
+		this.quizRespondido = quizRespondido;
+	}
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 	
 	

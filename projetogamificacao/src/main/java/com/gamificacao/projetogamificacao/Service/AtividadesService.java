@@ -34,7 +34,7 @@ public class AtividadesService {
 	*@author Allan 
 	*/
 	
-	public Optional<Usuario> status (Long idUsuario, Atividades atividades){
+	/*public Optional<Usuario> status (Long idUsuario, Atividades atividades){
 		return usuarioRepository.findById(idUsuario).map(usuarioExistente -> {
 			atividades.setUsuarioAtividade(usuarioExistente);
 			atividadesRepository.save(atividades);
@@ -53,7 +53,7 @@ public class AtividadesService {
 	*@author Allan 
 	*/
 
-	public List<InscricaoGrupo> gruposDosAmigos(Usuario usuario) {
+	/*public List<InscricaoGrupo> gruposDosAmigos(Usuario usuario) {
 
 		Set<Usuario> listaAmigos = usuario.getClan();
 		List<InscricaoGrupo> gruposInscritos = usuario.getListaInscricaoUG();
@@ -77,7 +77,7 @@ public class AtividadesService {
 	*@since 1.0
 	*@author Allan 
 	*/
-	public List<Atividades> atividadesAmigos(Usuario usuario) {
+	/*public List<Atividades> atividadesAmigos(Usuario usuario) {
 
 		Set<Usuario> listaAmigos = usuario.getClan();
 		List<Atividades> atividades = usuario.getAtividadesUsuario();

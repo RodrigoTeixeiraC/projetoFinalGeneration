@@ -37,7 +37,6 @@ public class GrupoService {
 	public Optional<List <Grupo>> buscarGrupo(String nome) {
 		List<Grupo> resultado= grupoRepository.findByNomeContainingIgnoreCase(nome);
 		return Optional.ofNullable(resultado);
-	}
-	
+	}	
 
 }

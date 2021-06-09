@@ -18,10 +18,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.gamificacao.projetogamificacao.Models.Atividades;
 import com.gamificacao.projetogamificacao.Models.Grupo;
 import com.gamificacao.projetogamificacao.Models.Usuario;
 import com.gamificacao.projetogamificacao.Models.UsuarioLogin;
-
+import com.gamificacao.projetogamificacao.Repository.AtividadesRepository;
 import com.gamificacao.projetogamificacao.Repository.GrupoRepository;
 
 import com.gamificacao.projetogamificacao.Repository.UsuarioRepository;
@@ -41,6 +42,9 @@ public class UsuarioController  {
 
 	@Autowired
 	private GrupoRepository grupoRepository;
+	
+	@Autowired
+	private AtividadesRepository atividadesRepository;
 
 	@GetMapping
 	public ResponseEntity<List<Usuario>> getAll(){
@@ -48,7 +52,7 @@ public class UsuarioController  {
 	}
 	
 	@GetMapping ("/id/{id}")
-	public ResponseEntity<Usuario> getById (@PathVariable long id){
+	public ResponseEntity<Usuario> getUsuarioById (@PathVariable long id){
 		return repositoryUser.findById(id).map(usuario -> ResponseEntity.ok(usuario)).orElse(ResponseEntity.notFound().build());
 	}
 	
@@ -56,11 +60,6 @@ public class UsuarioController  {
 	public ResponseEntity <?> getByNomeAndSobrenome (@PathVariable String nome, @PathVariable String sobrenome){
 		Optional <List<Usuario>> pesquisaUsuario = repositoryUser.findAllByNomeContainingOrSobrenomeContainingIgnoreCase(nome, sobrenome);
 		return pesquisaUsuario.map(user -> ResponseEntity.ok(user)).orElse(ResponseEntity.notFound().build()); 
-	}
-	
-	@PostMapping
-	public ResponseEntity <Usuario> post (@RequestBody Usuario usuario){
-		return ResponseEntity.status(HttpStatus.CREATED).body(repositoryUser.save(usuario));
 	}
 	
 	@PutMapping
@@ -104,6 +103,11 @@ public class UsuarioController  {
 		return usuarioService.inscrevendoGrupo(repositoryUser.findById(idUsuario).get(), grupoRepository.findById(idGrupo).get())
 				.map(inscricao -> ResponseEntity.status(201).body(inscricao))
 			.orElse(ResponseEntity.status(400).build());
+	}
+	
+	@PostMapping("/post/pensamentos")
+	ResponseEntity<Atividades> postagemPensamentos(Atividades postagem){
+		return ResponseEntity.status(HttpStatus.CREATED).body(atividadesRepository.save(postagem));
 	}
 
 }

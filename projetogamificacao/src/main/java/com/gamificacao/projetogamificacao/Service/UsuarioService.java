@@ -2,14 +2,8 @@ package com.gamificacao.projetogamificacao.Service;
 
 import java.nio.charset.Charset;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
-import java.util.function.Function;
-import java.util.stream.Stream;
 
 import org.apache.commons.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,16 +12,17 @@ import org.springframework.stereotype.Service;
 
 
 import com.gamificacao.projetogamificacao.Models.Aprovacao;
+import com.gamificacao.projetogamificacao.Models.AprovacaoAmigos;
 import com.gamificacao.projetogamificacao.Models.Atividades;
 import com.gamificacao.projetogamificacao.Models.Grupo;
 import com.gamificacao.projetogamificacao.Models.InscricaoGrupo;
 import com.gamificacao.projetogamificacao.Models.PostagemQuiz;
 import com.gamificacao.projetogamificacao.Models.Usuario;
 import com.gamificacao.projetogamificacao.Models.UsuarioLogin;
+import com.gamificacao.projetogamificacao.Repository.AprovacaoAmigosRepository;
 import com.gamificacao.projetogamificacao.Repository.AtividadesRepository;
 import com.gamificacao.projetogamificacao.Repository.GrupoRepository;
 import com.gamificacao.projetogamificacao.Repository.InscricaoRepository;
-import com.gamificacao.projetogamificacao.Repository.PostagemQuizRepository;
 import com.gamificacao.projetogamificacao.Repository.UsuarioRepository;
 
 @Service
@@ -40,14 +35,14 @@ public class UsuarioService {
 	private GrupoRepository repositoryGrupo;
 
 	@Autowired
-	private PostagemQuizRepository postQuizRepository;
-
-	@Autowired
 	private InscricaoRepository inscricaoRepository;
 
 
 	@Autowired
 	private AtividadesRepository atividadesRepository;
+	
+	@Autowired
+	private AprovacaoAmigosRepository aprovacaoAmigosRepository;
 
 
 	public Optional<Usuario> cadastrarUsuario(Usuario usuario) {
@@ -100,7 +95,7 @@ public class UsuarioService {
 			novoGrupo.setCriador(usuarioExistente);
 			repositoryGrupo.save(novoGrupo);
 			Atividades atividade = new Atividades(usuarioExistente.getNome()+ " criou o grupo " 
-			+ novoGrupo.getNome(), " ", usuarioExistente);
+			+ novoGrupo.getNome(), usuarioExistente);
 			atividadesRepository.save(atividade);
 			return repository.findById(idUsuario);
 		}).orElse(Optional.empty());
@@ -115,19 +110,18 @@ public class UsuarioService {
 	}
 
 
-	public Optional<Usuario> aceitarnoGrupo(Grupo novointegrante, Long idGrupo) {
-		return repository.findById(idGrupo).map(GrupoExistente -> {
-			novointegrante.setCriador(GrupoExistente);
-			repositoryGrupo.save(novointegrante);
-			return repository.findById(idGrupo);
-		}).orElse(Optional.empty());
+	public Optional<InscricaoGrupo> aceitarNoGrupo(InscricaoGrupo inscricao) {
+		inscricao.setAprovacao(Aprovacao.APROVADO);
+		return Optional.ofNullable(inscricaoRepository.save(inscricao));
+	}
+	
+	public Optional<InscricaoGrupo> NegarNoGrupo(InscricaoGrupo inscricao) {
+		inscricao.setAprovacao(Aprovacao.NEGADO);
+		return Optional.ofNullable(inscricaoRepository.save(inscricao));
 	}
 	
 	public List<PostagemQuiz> buscarPostQuiz (Usuario usuario){
-		
-
 		Optional<List<InscricaoGrupo>> listaInscricao = inscricaoRepository.findByUsuarioInscricao(usuario);
-
 		List<Grupo> grupos = new ArrayList<>();
 		List<PostagemQuiz> postagensGrupos = new ArrayList<>();
 				
@@ -142,6 +136,26 @@ public class UsuarioService {
 					.forEach(postagem -> postagensGrupos
 							.add(postagem)));	
 		return postagensGrupos;
+	}
+	
+	
+	Optional<AprovacaoAmigos> pedirAmizade(Usuario usuarioPedindo, Usuario UsuarioPrincipal){
+		AprovacaoAmigos aprovacao = new AprovacaoAmigos();
+		
+		aprovacao.setUsuarioPedindo(usuarioPedindo);
+		aprovacao.setUsuarioPrincipal(UsuarioPrincipal);
+		aprovacao.setAprovacao(Aprovacao.AGUARDANDO);
+		return Optional.ofNullable(aprovacaoAmigosRepository.save(aprovacao));
+	}
+	
+	Optional<AprovacaoAmigos> aceitarAmizade(AprovacaoAmigos aprovacao){
+		aprovacao.setAprovacao(Aprovacao.APROVADO);
+		return Optional.ofNullable(aprovacaoAmigosRepository.save(aprovacao));
+	}
+	
+	Optional<AprovacaoAmigos> negarAmizade(AprovacaoAmigos aprovacao){
+		aprovacao.setAprovacao(Aprovacao.NEGADO);
+		return Optional.ofNullable(aprovacaoAmigosRepository.save(aprovacao));
 	}
 
 }

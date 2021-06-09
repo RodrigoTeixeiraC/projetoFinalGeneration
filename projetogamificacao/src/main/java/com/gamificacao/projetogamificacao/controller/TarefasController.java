@@ -1,6 +1,8 @@
 package com.gamificacao.projetogamificacao.controller;
 
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -26,6 +29,17 @@ public class TarefasController {
 	
 	private @Autowired TarefasService tarefasService;
 	private @Autowired TarefaRepository tarefaRepository;
+	
+	@GetMapping
+	public ResponseEntity<List<Tarefa>> getAll(){
+		return ResponseEntity.ok(tarefaRepository.findAll());
+	}
+	
+	@GetMapping ("/{id}")
+	public ResponseEntity<Tarefa> getTarefaById (@PathVariable long id){
+		return tarefaRepository.findById(id).map(tarefa -> ResponseEntity.ok(tarefa))
+				.orElse(ResponseEntity.notFound().build());
+	}
 	
 	@PostMapping("/{id}")
 	public ResponseEntity<?> adicionarTarefa(
@@ -55,4 +69,5 @@ public class TarefasController {
 						.body(confirmada))
 				.orElse(ResponseEntity.status(400).build());
 	}
+	
 }

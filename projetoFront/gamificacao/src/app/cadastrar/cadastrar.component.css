@@ -1,0 +1,11 @@
+#img-bg{
+    background-image: url('https://i.imgur.com/J0yKB0r.jpg');
+    min-height: 695px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.cor{
+    background: linear-gradient(180deg, rgba(3, 9, 58, 0.9) 0%, rgba(3, 9, 58, 0.18) 80.73%), #FFFFFF;
+}
