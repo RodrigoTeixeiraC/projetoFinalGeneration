@@ -16,37 +16,41 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gamificacao.projetogamificacao.Models.PostagemQuiz;
+import com.gamificacao.projetogamificacao.Models.Usuario;
 import com.gamificacao.projetogamificacao.Repository.PostagemQuizRepository;
+import com.gamificacao.projetogamificacao.Service.UsuarioService;
 
 @RestController
 @RequestMapping("/postagem-quiz")
 @CrossOrigin("*")
 public class PostagemQuizController {
 	
-	@Autowired
-	private PostagemQuizRepository repository;
+	private @Autowired PostagemQuizRepository repository;
+	private @Autowired UsuarioService usuarioService;
 	
-	public @GetMapping ("/todas") ResponseEntity<List<PostagemQuiz>> GetAll()
-	{
+	@GetMapping 
+	public ResponseEntity<List<PostagemQuiz>> getAllPostagens(){
 		return ResponseEntity.ok(repository.findAll());
 	}
-	
-	public @GetMapping ("/{id}") ResponseEntity<PostagemQuiz> GetById (@PathVariable long id){
+	@GetMapping("/{id}") 
+	public ResponseEntity<PostagemQuiz> getPostagemById(@PathVariable long id){
 		return repository.findById(id).map (postQuiz -> ResponseEntity.ok(postQuiz)).orElse(ResponseEntity.notFound().build());
 	}	
-	
-	
-	public @PostMapping ResponseEntity<PostagemQuiz> post (@RequestBody PostagemQuiz postagemQuiz){
+	@GetMapping("/post-grupos")
+	public ResponseEntity<List<PostagemQuiz>> buscarPostQuiz(Usuario usuario){
+		return ResponseEntity.status(HttpStatus.OK).body(usuarioService.buscarPostQuiz(usuario));
+	}
+	@PostMapping 
+	public ResponseEntity<PostagemQuiz> postPostagem(@RequestBody PostagemQuiz postagemQuiz){
 		return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(postagemQuiz));
 	}
-	
-	public @PutMapping ResponseEntity<PostagemQuiz> put (@RequestBody PostagemQuiz postagemQuiz){
+	@PutMapping 
+	public ResponseEntity<PostagemQuiz> putPostagem(@RequestBody PostagemQuiz postagemQuiz){
 		return ResponseEntity.status(HttpStatus.OK).body(repository.save(postagemQuiz));
 	}
-	
 	@DeleteMapping ("/deletar/{idPostagem}")
-	public void delete (@PathVariable long idPostagem) {
+	public void deletePostagem(@PathVariable long idPostagem) {
 		repository.deleteById(idPostagem);
 	}
-
+	
 }

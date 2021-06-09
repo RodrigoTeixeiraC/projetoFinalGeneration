@@ -28,8 +28,6 @@ public class InscricaoGrupo {
 	private Aprovacao aprovacao;
 		
 	
-
-	
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
 	@JoinColumn(name = "usuario_id")
 	private Usuario usuarioInscricao; 
