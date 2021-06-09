@@ -66,7 +66,7 @@ public class Usuario {
 	private List<AprovacaoAmigos> meusPedidosAmizade = new ArrayList<>();
 	
 	@OneToMany(mappedBy = "criador")
-	@JsonIgnoreProperties({"criador"})
+	@JsonIgnoreProperties({"criador", "listaInscricaoGU"})
 	private List<Grupo> gruposCriados = new ArrayList<>();
 	
 	@OneToMany(mappedBy = "usuarioAtividade")
@@ -82,10 +82,11 @@ public class Usuario {
 	private String avatar; //Substitui icone, verificar com grupo
 	
 	@OneToMany (mappedBy = "usuarioInscricao", cascade = CascadeType.REMOVE)
-	@JsonIgnoreProperties("usuarioInscricao")
+	@JsonIgnoreProperties({"usuarioInscricao" })
 	private List<InscricaoGrupo> listaInscricaoUG = new ArrayList<>();
 	
 	@OneToMany (mappedBy = "usuarioResponsavel", cascade = CascadeType.REMOVE)
+	@JsonIgnoreProperties({"usuarioResponsavel" })
 	private List<Tarefa> listaTarefas = new ArrayList<>();
 	
 	@ManyToMany
