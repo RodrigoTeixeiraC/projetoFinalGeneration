@@ -10,6 +10,7 @@ import { LoginComponent } from './login/login.component';
 import { CadastrarComponent } from './cadastrar/cadastrar.component';
 import { FormsModule } from '@angular/forms';
 import { PerfilComponent } from './perfil/perfil.component';
+import { PerfilVisitanteComponent } from './perfil-visitante/perfil-visitante.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { PerfilComponent } from './perfil/perfil.component';
     LoginComponent,
     CadastrarComponent,
     PerfilComponent,
+    PerfilVisitanteComponent,
   ],
   imports: [
     BrowserModule,
