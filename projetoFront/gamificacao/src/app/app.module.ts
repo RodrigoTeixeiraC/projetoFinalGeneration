@@ -7,7 +7,6 @@ import { AppComponent } from './app.component';
 import { MenuComponent } from './menu/menu.component';
 import { RodapeComponent } from './rodape/rodape.component';
 import { LoginComponent } from './login/login.component';
-import { CadastrarComponent } from './cadastrar/cadastrar.component';
 import { FormsModule } from '@angular/forms';
 import { FeedComponent } from './feed/feed.component';
 import { TarefasComponent } from './tarefas/tarefas.component';
@@ -18,7 +17,6 @@ import { TarefasComponent } from './tarefas/tarefas.component';
     MenuComponent,
     RodapeComponent,
     LoginComponent,
-    CadastrarComponent,
     FeedComponent,
     TarefasComponent
   ],

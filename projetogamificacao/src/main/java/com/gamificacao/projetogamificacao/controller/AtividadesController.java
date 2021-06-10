@@ -39,9 +39,9 @@ public class AtividadesController {
 	public Optional<List<Atividades>> getAllAtividades(){
 		return Optional.ofNullable(atividadesRepository.findAll());
 	}
-	@GetMapping ("/atividades-amigos")
-	public ResponseEntity<List<Atividades>> buscarAtividadesAmigos(Usuario usuario){
-		return ResponseEntity.status(HttpStatus.OK).body(atividadesService.atividadesAmigos(usuario));
+	@GetMapping ("/atividades-amigos/{id}")
+	public ResponseEntity<List<Atividades>> buscarAtividadesAmigos(@PathVariable(value = "id") Long id){
+		return ResponseEntity.status(HttpStatus.OK).body(atividadesService.atividadesAmigos(id));
 	}
 	@PostMapping
 	public ResponseEntity<Optional<Atividades>> postAtividade(@Valid @RequestBody Atividades status){

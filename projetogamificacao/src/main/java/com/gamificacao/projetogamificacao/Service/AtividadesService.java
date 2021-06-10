@@ -11,11 +11,13 @@ import com.gamificacao.projetogamificacao.Models.AprovacaoAmigos;
 import com.gamificacao.projetogamificacao.Models.Atividades;
 import com.gamificacao.projetogamificacao.Models.Usuario;
 import com.gamificacao.projetogamificacao.Repository.AtividadesRepository;
+import com.gamificacao.projetogamificacao.Repository.UsuarioRepository;
 
 @Service
 public class AtividadesService {
 
 	private @Autowired AtividadesRepository atividadesRepository;
+	private @Autowired UsuarioRepository usuarioRepository;
 
 	/**
 	* Criar uma atividade 
@@ -39,8 +41,8 @@ public class AtividadesService {
 	*@since 1.0
 	*@author Allan 
 	*/
-	public List<Atividades> atividadesAmigos(Usuario usuario) {
-		List<AprovacaoAmigos> amigos = usuario.getMeusPedidosAmizade();
+	public List<Atividades> atividadesAmigos(Long id) {
+		List<AprovacaoAmigos> amigos =  usuarioRepository.findById(id).get().getMeusPedidosAmizade();
 		List<Atividades> listaAtividades = new ArrayList<>();
 		amigos.forEach(amigo -> listaAtividades.addAll(amigo.getUsuarioPedindo().getAtividadesUsuario()));
 		return listaAtividades;
