@@ -71,7 +71,7 @@
         <div class="list-group lista">
             <a routerLink='' class="list-group-item list-group-item-action">Lista de Grupos</a>
             
-            <a *ngFor = 'let grupo of usuario.listaInscricaoUG' class="list-group-item list-group-item-action list-group-item-primary">{{grupo.grupoInscricao}}</a>
+            <a routerLink='' class="list-group-item list-group-item-action list-group-item-primary" *ngFor = 'let grupo of usuario.listaInscricaoUG'>{{grupo.grupoInscricao.nome}}</a>
           </div>
     </div>   
 </div>
