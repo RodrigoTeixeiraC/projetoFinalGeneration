@@ -10,8 +10,6 @@ import { Usuario } from '../model/Usuario';
 })
 export class TarefasService {
 
-  
-
   constructor(private http: HttpClient) { }
 
   token ={
@@ -19,7 +17,7 @@ export class TarefasService {
   }
 
   getAllTarefas(): Observable<Tarefa[]>{
-    return this.http.get<Tarefa[]>('http://localhost:8080/tarefa/', this.token)
+    return this.http.get<Tarefa[]>('http://localhost:8080/tarefa', this.token)
   }
 
   getTarefaById(id: number): Observable<Tarefa>{
@@ -27,7 +25,7 @@ export class TarefasService {
   }
 
   postTarefa(tarefa: Tarefa): Observable<Tarefa>{
-    return this.http.post<Tarefa>('http://localhost:8080/tarefa/',tarefa, this.token)
+    return this.http.post<Tarefa>('http://localhost:8080/tarefa',tarefa, this.token)
   }
 
   editarTarefa(tarefa: Tarefa): Observable<Tarefa>{
