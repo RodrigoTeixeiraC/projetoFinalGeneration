@@ -74,11 +74,9 @@ public class UsuarioController  {
 		return ResponseEntity.status(HttpStatus.CREATED)
 				.body(usuarioService.cadastrarUsuario(usuario));
 	}
-	@PostMapping("/{id_usuario}/novo-grupo")
-	public ResponseEntity<Usuario> criarGrupo(
-			@PathVariable(value = "id_usuario") Long idUsuario,
-			@Valid @RequestBody Grupo novoGrupo){
-		return usuarioService.criarGrupo(novoGrupo, idUsuario)
+	@PostMapping("/novo-grupo")
+	public ResponseEntity<?> criarGrupo(@RequestBody Grupo novoGrupo){
+		return usuarioService.criarGrupo(novoGrupo)
 				.map(usuarioCriador -> ResponseEntity.status(201).body(usuarioCriador))
 				.orElse(ResponseEntity.status(400).build());	
 	}

@@ -72,15 +72,9 @@ public class UsuarioService {
 	 * @since 1.0
 	 * @author Rive
 	 */
-	public Optional<Usuario> criarGrupo(Grupo novoGrupo, Long idUsuario) {
-		return repository.findById(idUsuario).map(usuarioExistente -> {
-			novoGrupo.setCriador(usuarioExistente);
-			repositoryGrupo.save(novoGrupo);
-			Atividades atividade = new Atividades(usuarioExistente.getNome()+ " criou o grupo " 
-			+ novoGrupo.getNome(), usuarioExistente);
-			atividadesRepository.save(atividade);
-			return repository.findById(idUsuario);
-		}).orElse(Optional.empty());
+	public Optional<Grupo> criarGrupo(Grupo novoGrupo) {
+		return Optional.ofNullable(repositoryGrupo.save(novoGrupo));
+			
 	}
 	public Optional<InscricaoGrupo> inscrevendoGrupo(Usuario novoUsuario, Grupo novoGrupo) {
 		InscricaoGrupo inscricao = new InscricaoGrupo();
@@ -104,11 +98,11 @@ public class UsuarioService {
 		listaInscricao
 			.get()
 			.stream()
-			.forEach(grupo -> {
-				if(grupo.getAprovacao().equals(Aprovacao.APROVADO)) {
-					grupos.add(grupo.getGrupoInscricao());
-				}	
-			});	
+			.forEach(grupo ->
+				
+					grupos.add(grupo.getGrupoInscricao())
+				
+			);	
 		grupos
 			.forEach(listaPostagens -> listaPostagens
 					.getListaPostQuiz()
