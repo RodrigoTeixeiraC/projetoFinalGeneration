@@ -2,7 +2,7 @@
 
     <div class="row">
 
-        <div class="col-md-6" id="">
+        <div class="col-md-6" >
             <h1 class="mt-5 mb-5 youwen">YOU WEN</h1>
 
             <div class="card"></div>
@@ -22,22 +22,22 @@
 
                         <div class="form-group text-center mt-4 mb-1">
                             <label for="usuario">NICKNAME</label>
-                            <input class='form-control color1' type="text" name="usuario" id="usuario">
+                            <input [(ngModel)]='usuarioLogin.usuario' class='form-control color1' type="text" name="usuario" id="usuario">
                         </div>
         
                         <div class="form-group text-center mt-2 mb-1">
                             <label for="senha">SENHA</label>
-                            <input class='form-control color2' type="password" name="senha" id="senha">
+                            <input [(ngModel)]='usuarioLogin.senha' class='form-control color2' type="password" name="senha" id="senha">
                         </div>
     
                             <a class="text-center text-white">Esqueceu sua senha?</a>
 
                         <div class="text-center mt-2 mb-2">
-                            <button type="submit" class="btn corBotao">Entrar</button>
+                            <button type="submit" class="btn corBotao" (click)='login()'>Entrar</button>
                         </div>
         
                         <div class="text-center">
-                            <button type="submit" class="btn corBotao" routerLink="/modal" data-toggle="modal" data-target="#modalExemplo">Criar conta</button>
+                            <button type="submit" class="btn corBotao" data-toggle="modal" data-target="#modalExemplo">Criar conta</button>
                         </div> 
 
                     </div>
@@ -76,115 +76,6 @@
 
 </div>
 
-
-
-
-
-
-
-<div class="wrapper fotos">
-    <h1 class="cardH1">Se me atacar, eu vou atacar!</h1>
-    <div class="cols">
-              <div class="col" ontouchstart="this.classList.toggle('hover');">
-                  <div class="containerCards">
-                      <div class="front" style="background-image: url(https://unsplash.it/500/500/)">
-                          <div class="inner">
-                              <p>Diligord</p>
-                <span>Lorem ipsum</span>
-                          </div>
-                      </div>
-                      <div class="back">
-                          <div class="inner">
-                            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Alias cum repellat velit quae suscipit c.</p>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-              <div class="col" ontouchstart="this.classList.toggle('hover');">
-                  <div class="containerCards">
-                      <div class="front" style="url(https://unsplash.it/511/511/)">
-                          <div class="inner">
-                              <p>Rocogged</p>
-                <span>Lorem ipsum</span>
-                          </div>
-                      </div>
-                      <div class="back">
-                          <div class="inner">
-                              <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Alias cum repellat velit quae suscipit c.</p>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-              <div class="col" ontouchstart="this.classList.toggle('hover');">
-                  <div class="containerCards">
-                      <div class="front" style="background-image: url(https://unsplash.it/502/502/)">
-                          <div class="inner">
-                              <p>Strizzes</p>
-                <span>Lorem ipsum</span>
-                          </div>
-                      </div>
-                      <div class="back">
-                          <div class="inner">
-                              <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Alias cum repellat velit quae suscipit c.</p>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-              <div class="col" ontouchstart="this.classList.toggle('hover');">
-                  <div class="containerCards">
-                      <div class="front" style="background-image: url(https://unsplash.it/503/503/)">
-                          <div class="inner">
-                              <p>Clossyo</p>
-                <span>Lorem ipsum</span>
-                          </div>
-                      </div>
-                      <div class="back">
-                          <div class="inner">
-                              <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Alias cum repellat velit quae suscipit c.</p>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-              <div class="col" ontouchstart="this.classList.toggle('hover');">
-                  <div class="containerCards">
-                      <div class="front" style="background-image: url(https://unsplash.it/504/504/">
-                          <div class="inner">
-                              <p>Rendann</p>
-                <span>Lorem ipsum</span>
-                          </div>
-                      </div>
-                      <div class="back">
-                          <div class="inner">
-                              <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Alias cum repellat velit quae suscipit c.</p>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-              <div class="col" ontouchstart="this.classList.toggle('hover');">
-                  <div class="containerCards">
-                      <div class="front" style ="background-image: url(https://unsplash.it/505/505/)">
-                          <div class="inner">
-                              <p>Reflupper</p>
-                <span>Lorem ipsum</span>
-                          </div>
-                      </div>
-                      <div class="back">
-                          <div class="inner">
-                              <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Alias cum repellat velit quae suscipit c.</p>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-         
-          </div>
-   </div>
-
-
-
-
-
-
-
 <!-- Modal Cadastrar -->
 <div class="modal fade" id="modalExemplo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -200,46 +91,51 @@
 
             <div class="form-group">
                 <label for="nome"></label>
-                <input class='form-control' type="text" name="nome" id="nome" placeholder='Nome'>
+                <input [(ngModel)]='usuario.nome' class='form-control' type="text" name="nome" id="nome" placeholder='Seu nome'>
             </div>
 
             <div class="form-group">
                 <label for="sobrenome"></label>
-                <input class='form-control' type="text" name="sobrenome" id="sobrenome" placeholder='Sobrenome'>
+                <input [(ngModel)]='usuario.sobrenome' class='form-control' type="text" name="sobrenome" id="sobrenome" placeholder='Sobrenome'>
             </div>
 
             <div class="form-group">
                 <label for="usuario"></label>
-                <input class='form-control' type="text" name="usuario" id="usuario" placeholder='Usuário'>
+                <input [(ngModel)]='usuario.usuario' class='form-control' type="text" name="usuario" id="usuarioInput" placeholder='Usuário'>
             </div>
 
             <div class="form-group">
                 <label for="email"></label>
-                <input class='form-control' type="email" name="email" id="email" placeholder='E-mail'>
+                <input [(ngModel)]='usuario.email' class='form-control' type="email" name="email" id="email" placeholder='E-mail'>
             </div>
 
             <div class="form-group">
                 <label for="dataNascimento"></label>
-                <input class='form-control' type="date" name="dataNascimento" id="dataNascimento" placeholder='Data de Nascimento'>
+                <input [(ngModel)]='usuario.dataNascimento' class='form-control' type="date" name="dataNascimento" id="dataNascimento" placeholder='Data de Nascimento'>
             </div>
 
             <div class="form-group">
-                <label for="tel"></label>
-                <input class='form-control' type="number" name="tel" id="tel" placeholder='Telefone Celular'>
+                <label for="celular"></label>
+                <input [(ngModel)]='usuario.celular' class='form-control' type="number" name="celular" id="celular" placeholder='Telefone Celular'>
+            </div>
+
+            <div class="form-group">
+                <label for="foto"></label>
+                <input [(ngModel)]='usuario.foto' class='form-control' type="text" name="foto" id="foto" placeholder='Link da foto'>
             </div>
 
             <div class="form-group">
                 <label for="senha"></label>
-                <input class='form-control' type="password" name="senha" id="senha" placeholder='Sua senha'>
+                <input (input)='confirmSenha($event)' class='form-control' type="password" name="senha" id="senhaInput" placeholder='Sua senha'>
             </div>
             
             <div class="form-group">
                 <label for="confirmSenha"></label>
-                <input class='form-control' type="password" name="confirmSenha" id="confirmSenha" placeholder='Confirme sua Senha'>
+                <input [(ngModel)]='usuario.senha' class='form-control' type="password" name="confirmSenha" id="confirmSenha" placeholder='Confirme sua Senha'>
             </div>
 
             <div class="text-center">
-                <a href="#" class="btn corBotao btn-lg active" role="button" aria-pressed="true">Cadastrar</a>
+                <a class="btn corBotao btn-lg active" role="button" aria-pressed="true" (click)='cadastrar()' data-dismiss="modal">Cadastrar</a>
             </div>
 
         </div>

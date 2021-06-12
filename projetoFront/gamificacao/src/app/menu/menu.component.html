@@ -1,39 +1,115 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-danger text-light">
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#conteudoNavbarSuportado" aria-controls="conteudoNavbarSuportado" aria-expanded="false" aria-label="Alterna navegação">
+<nav class="navbar navbar-expand-lg navbar-dark bg-nav">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#conteudoNavbarSuportado"
+    aria-controls="conteudoNavbarSuportado" aria-expanded="false" aria-label="Alterna navegação">
     <span class="navbar-toggler-icon"></span>
   </button>
+  <div class="collapse navbar-collapse" id="conteudoNavbarSuportado">
+    <!--LG mexe Com a reponsividade do nosso nav Bar | navbar-light vai dar um contrate no bg-->
 
-    <a class="navbar-brand" href="#">
-      <img src="" width="30" height="30" alt="">
-    </a>
+    <!--Nome da esquerda-->
 
-    <ul class="navbar-nav m-auto d-flex align-items-center p-2">
-        <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar" aria-label="Pesquisar">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Pesquisar</button>
+    <a class="navbar-brand h1 mb-0 ml-0" routerLink = '/feed'><img src="https://i.imgur.com/cAZSnnT.jpg" alt=""
+        class="m-0 ml-5 rounded-circle" width="80px" /></a>
+
+    <div class="container d-flex align-items mt-5">
+      <div class="row mb-4">
+        <form class="form-inline navbar-nav">
+
+          <!--Input pesquisar para ser pensado pós apresentação da generation. GetByNomeAndSobrenome-->
+
+          <input type="search" class="form-control ml-4" placeholder="Pesquisar usuáries" style="border-radius: 2rem" />
+          <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+            aria-expanded="false"><i class="icons-nav fa fa-search" aria-hidden="true"></i></a>
+
         </form>
-    </ul>
-
-<ul class="dropdown">
-    <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" 
-        aria-haspopup="true" aria-expanded="false">
-          Grupos
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Empresa</a>
-          <a class="dropdown-item" href="#">Pessoal</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Sair</a>
-        </div>
-      </li>
-
-</ul>
- 
-     
-      <img src="" width="30" height="30" alt="">
+      </div>
 
 
-  </nav>
+      <ul class="navbar-nav text-center mr-5">
 
-  
+        <li class="nav-item dropdown">
+
+          <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+            aria-expanded="false">
+            <i class="icons-nav fa fa-handshake-o" aria-hidden="true">
+              <p class="f-icons mt-2">Conexões</p>
+            </i>
+          </a>
+
+          <div class="dropdown-menu">
+
+            <a class="dropdown-item" href="#">
+
+              <a class="navbar-brand d-flex flex-nowrap align-items-center mb-0 ml-0" href="#">
+                <div>
+                  <img src="https://i.imgur.com/cAZSnnT.jpg" alt="" class="rounded-circle" width="40px" />
+                </div>
+                <div>
+                  <p class="text-dark fs-20 m-0 ml-2">nome do usuário</p>
+                </div>
+              </a>
+
+
+            </a>
+            <div class="dropdown-divider"></div>
+            <div class="row d-flex justify-content-center">
+              <button class="mb-2 bt-aceitar btn btn-outline-success">aceitar</button>
+              <button class="mb-2 ml-2 bt-aceitar btn btn-outline-danger">recusar</button>
+            </div>
+
+          </div>
+        </li>
+        <!--O ml(margin-left) vai colocar o conteudo na direita-->
+        <li class="nav-item text-center">
+          <a class="nav-link" routerLink='/tarefas'> <i class="icons-nav fa fa-calendar-check-o" aria-hidden="true"></i>
+            <p class="f-icons mt-1">Tarefas</p>
+          </a>
+        </li>
+
+        <li class="nav-item text-center">
+          <a class="nav-link" routerLink="/grupos"><i class="icons-nav fa fa-users" aria-hidden="true"></i>
+            <p class="f-icons mt-1">Grupos</p>
+          </a>
+        </li>
+
+        <ul class="navbar-nav ml-auto text-center">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+              aria-expanded="false"> <i class="icons-nav fa fa-user-circle" aria-hidden="true">
+                <p class="f-icons mt-2">Meu perfil</p>
+              </i>
+
+            </a>
+
+            <div class="dropdown-menu f-icons text-center">
+              <div>
+                <button type="button" class="btn btn-outline-secondary mb-2" data-toggle="modal"
+                  data-target="#modalBio">Editar
+                  perfil
+                  <i class="fa fa-pencil-square-o ml-2" aria-hidden="true"></i>
+                </button>
+
+                <button routerLink='/perfil' class="btn btn-outline-success"> Visualizar perfil
+                  <i class="fa fa-eye ml-2" aria-hidden="true"></i>
+                </button>
+                <div class="dropdown-divider"></div>
+                <button routerLink='/login' class="btn btn-outline-danger">Sair<i class="fa fa-power-off ml-2"
+                    aria-hidden="true"></i>
+                </button>
+
+
+              </div>
+            </div>
+          </li>
+
+        </ul>
+
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+<!-- Modal -->
+
+    <!--Fim do Modal-->
