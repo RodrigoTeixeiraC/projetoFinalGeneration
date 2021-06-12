@@ -2,7 +2,7 @@
 
     <div class="row">
 
-        <div class="col-md-6" id="">
+        <div class="col-md-6" >
             <h1 class="mt-5 mb-5 youwen">YOU WEN</h1>
 
             <div class="card"></div>
@@ -101,7 +101,7 @@
 
             <div class="form-group">
                 <label for="usuario"></label>
-                <input [(ngModel)]='usuario.usuario' class='form-control' type="text" name="usuario" id="usuario" placeholder='Usuário'>
+                <input [(ngModel)]='usuario.usuario' class='form-control' type="text" name="usuario" id="usuarioInput" placeholder='Usuário'>
             </div>
 
             <div class="form-group">
@@ -126,7 +126,7 @@
 
             <div class="form-group">
                 <label for="senha"></label>
-                <input (input)='confirmSenha($event)' class='form-control' type="password" name="senha" id="senha" placeholder='Sua senha'>
+                <input (input)='confirmSenha($event)' class='form-control' type="password" name="senha" id="senhaInput" placeholder='Sua senha'>
             </div>
             
             <div class="form-group">

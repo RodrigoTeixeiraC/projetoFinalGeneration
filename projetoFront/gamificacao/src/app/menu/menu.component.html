@@ -8,7 +8,7 @@
 
     <!--Nome da esquerda-->
 
-    <a class="navbar-brand h1 mb-0 ml-0" href="#"><img src="https://i.imgur.com/cAZSnnT.jpg" alt=""
+    <a class="navbar-brand h1 mb-0 ml-0" routerLink = '/feed'><img src="https://i.imgur.com/cAZSnnT.jpg" alt=""
         class="m-0 ml-5 rounded-circle" width="80px" /></a>
 
     <div class="container d-flex align-items mt-5">
@@ -61,13 +61,13 @@
         </li>
         <!--O ml(margin-left) vai colocar o conteudo na direita-->
         <li class="nav-item text-center">
-          <a class="nav-link" href="#"> <i class="icons-nav fa fa-calendar-check-o" aria-hidden="true"></i>
+          <a class="nav-link" routerLink='/tarefas'> <i class="icons-nav fa fa-calendar-check-o" aria-hidden="true"></i>
             <p class="f-icons mt-1">Tarefas</p>
           </a>
         </li>
 
         <li class="nav-item text-center">
-          <a class="nav-link" href="#"><i class="icons-nav fa fa-users" aria-hidden="true"></i>
+          <a class="nav-link" routerLink="/grupos"><i class="icons-nav fa fa-users" aria-hidden="true"></i>
             <p class="f-icons mt-1">Grupos</p>
           </a>
         </li>
@@ -89,7 +89,7 @@
                   <i class="fa fa-pencil-square-o ml-2" aria-hidden="true"></i>
                 </button>
 
-                <button href="#" class="btn btn-outline-success"> Visualizar perfil
+                <button routerLink='/perfil' class="btn btn-outline-success"> Visualizar perfil
                   <i class="fa fa-eye ml-2" aria-hidden="true"></i>
                 </button>
                 <div class="dropdown-divider"></div>

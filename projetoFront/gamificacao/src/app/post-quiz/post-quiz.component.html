@@ -63,38 +63,39 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="titulo">Pergunta</label>
-                            <input type="text" class="form-control bg-transparent text-white" id="titulo"
+                            <input type="text" class="form-control bg-transparent text-white" id="pergunta"
                                 placeholder="Digite aqui sua pergunta">
                         </div>
                         <div class="form-group">
                             <label for="titulo">Resposta correta</label>
-                            <input type="text" class="form-control bg-transparent text-white" id="titulo"
+                            <input type="text" class="form-control bg-transparent text-white" id="respostac"
                                 placeholder="Digite aqui a resposta correta">
                         </div>
                         <div class="form-group">
                             <label for="titulo">Resposta falsa</label>
-                            <input type="text" class="form-control bg-transparent text-white" id="titulo"
+                            <input type="text" class="form-control bg-transparent text-white" id="respostaf"
                                 placeholder="Digite aqui a resposta falsa">
                         </div>
                         <div class="form-group">
                             <label for="titulo">Resposta falsa</label>
-                            <input type="text" class="form-control bg-transparent text-white" id="titulo"
+                            <input type="text" class="form-control bg-transparent text-white" id="respostaf2"
                                 placeholder="Digite aqui a resposta falsa">
                         </div>
                         <div class="form-group">
                             <label for="titulo">Pontuação</label>
-                            <input type="text" class="form-control bg-transparent text-white" id="titulo"
+                            <input type="text" class="form-control bg-transparent text-white" id="pontuacao"
                                 placeholder="Atribua uma pontuação de 1 a 10">
                         </div>
                         <div class="form-group">
                             <label for="titulo">Mentalidade</label>
-                            <input type="text" class="form-control bg-transparent text-white" id="titulo"
+                            <input type="text" class="form-control bg-transparent text-white" id="mentalidade"
                                 placeholder="Atribua uma pontuação de 1 a 10">
                         </div>
 
                         <div class="modal-footer d-flex justify-content-center">
                             <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Fechar</button>
-                            <button type="button" class="btn btn-outline-primary" data-dismiss="modal">
+                            <button type="button" class="btn btn-outline-primary" data-dismiss="modal" 
+                            (click) = 'publicar()' >
                                 Adicionar</button>
                         </div>
                     </div>

@@ -9,6 +9,7 @@
         </div>
       </div>
 
+
       <div class="d-flex justify-content-between">
         <nav class="mt-3 mb-2 d-flex justify-content-start">
           <div class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -34,59 +35,59 @@
 
 
       <div class="tab-content" id="nav-tabContent">
-        <div class="tab-pane fade show active d-flex flex-row flex-wrap justify-content-center" id="nav-home"
+        <div class="tab-pane fade show active " id="nav-home"
           role="tabpanel" aria-labelledby="nav-home-tab">
-
-          <div class="mr-2 col-md-3" *ngFor='let grupo of usuario.gruposCriados'>
-            <div class="card mt-3">
-              <div class="card-body">
-                <div class="row ml-1 mb-3 d-flex flex-nowrap align-items-center">
-                  <img class='fotoGrupo mr-3' src="{{grupo.foto}}" alt="">
-                  <h2 class="text-truncate">{{grupo.nome}}</h2>
+          <div class="d-flex flex-row flex-wrap justify-content-center">
+            <div class="mr-2 col-md-3" *ngFor='let grupo of usuario.gruposCriados'>
+              <div class="card mt-3">
+                <div class="card-body">
+                  <div class="row ml-1 mb-3 d-flex flex-nowrap align-items-center">
+                    <img class='fotoGrupo mr-3' src="{{grupo.foto}}" alt="">
+                    <h2 class="text-truncate">{{grupo.nome}}</h2>
+                  </div>
+                  <p class="card-text text-truncate">{{grupo.descricao}}</p>
+                  <button [routerLink]="['/grupo', grupo.id]" class="btn btn-info">Ver grupo</button>
                 </div>
-                <p class="card-text text-truncate">{{grupo.descricao}}</p>
-                <button [routerLink]="['/grupo', grupo.id]" class="btn btn-info">Ver grupo</button>
               </div>
             </div>
           </div>
-
         </div>
 
 
-        <div class="tab-pane fade d-flex flex-row flex-wrap justify-content-center" id="nav-profile" role="tabpanel"
+        <div class="tab-pane fade" id="nav-profile" role="tabpanel"
           aria-labelledby="nav-profile-tab">
-
-          <div class="mr-2 col-md-3" *ngFor='let grupo of usuario.listaInscricaoUG'>
-            <div class="card mt-3">
-              <div class="card-body">
-                <div class="row ml-1 mb-3 d-flex flex-nowrap align-items-center">
-                  <img class='fotoGrupo mr-3' src="{{grupo.grupoInscricao.foto}}" alt="">
-                  <h2 class="text-truncate">{{grupo.grupoInscricao.nome}}</h2>
+          <div class="d-flex flex-row flex-wrap justify-content-center">
+            <div class="mr-2 col-md-3" *ngFor='let grupo of usuario.listaInscricaoUG'>
+              <div class="card mt-3">
+                <div class="card-body">
+                  <div class="row ml-1 mb-3 d-flex flex-nowrap align-items-center">
+                    <img class='fotoGrupo mr-3' src="{{grupo.grupoInscricao.foto}}" alt="">
+                    <h2 class="text-truncate">{{grupo.grupoInscricao.nome}}</h2>
+                  </div>
+                  <p class="card-text text-truncate">{{grupo.grupoInscricao.descricao}}</p>
+                  <button [routerLink]="['/grupo', grupo.id]" class="btn btn-info">Ver grupo</button>
                 </div>
-                <p class="card-text text-truncate">{{grupo.grupoInscricao.descricao}}</p>
-                <button [routerLink]="['/grupo', grupo.id]" class="btn btn-info">Ver grupo</button>
               </div>
             </div>
           </div>
-
         </div>
 
-        <div class="tab-pane fade d-flex flex-row flex-wrap justify-content-center" id="nav-todos" role="tabpanel"
+        <div class="tab-pane fade" id="nav-todos" role="tabpanel"
           aria-labelledby="nav-todos-tab">
-
-          <div class="mr-2 col-md-3" *ngFor='let grupo of todosGrupos'>
-            <div class="card mt-3">
-              <div class="card-body">
-                <div class="row ml-1 mb-3 d-flex flex-nowrap align-items-center">
-                  <img class='fotoGrupo mr-3' src="{{grupo.foto}}" alt="">
-                  <h2 class="text-truncate">{{grupo.nome}}</h2>
+          <div class="d-flex flex-row flex-wrap justify-content-center">
+            <div class="mr-2 col-md-3" *ngFor='let grupo of todosGrupos'>
+              <div class="card mt-3">
+                <div class="card-body">
+                  <div class="row ml-1 mb-3 d-flex flex-nowrap align-items-center">
+                    <img class='fotoGrupo mr-3' src="{{grupo.foto}}" alt="">
+                    <h2 class="text-truncate">{{grupo.nome}}</h2>
+                  </div>
+                  <p class="card-text text-truncate">{{grupo.descricao}}</p>
+                  <button [routerLink]="['/grupo', grupo.id]" class="btn btn-info">Ver grupo</button>
                 </div>
-                <p class="card-text text-truncate">{{grupo.descricao}}</p>
-                <button [routerLink]="['/grupo', grupo.id]" class="btn btn-info">Ver grupo</button>
               </div>
             </div>
           </div>
-
         </div>
 
 
@@ -123,12 +124,12 @@
               <div class="form-group">
                 <label for="titulo">Descrição</label>
                 <textarea [(ngModel)]='grupo.descricao' class="form-control bg-transparent text-white" name="texto"
-                  id="texto" rows="3" placeholder="Escreva a descrição do grupo aqui"></textarea>
+                  id="descricao" rows="3" placeholder="Escreva a descrição do grupo aqui"></textarea>
               </div>
               <div class="form-group">
                 <label for="titulo">Foto</label>
                 <textarea [(ngModel)]='grupo.foto' class="form-control bg-transparent text-white" name="texto"
-                  id="texto" rows="1" placeholder="Coloque aqui o link da foto"></textarea>
+                  id="titulo" rows="1" placeholder="Coloque aqui o link da foto"></textarea>
               </div>
               <div class="modal-footer d-flex justify-content-center">
                 <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Fechar</button>
