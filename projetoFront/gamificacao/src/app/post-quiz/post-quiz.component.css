@@ -10,6 +10,7 @@
 
 .nav-feed{
   color: #313440;
+
 }
 
 .nav-feed:hover{
@@ -37,5 +38,37 @@
   background: linear-gradient( #0b082f,  #463546);
   border: 1px solid #F20F97;
   border-radius: 10px;
+}
+h1 {
+  color: rgb(250, 204, 0);
+
+}
+
+.nav-feed:hover{
+  color: #a17aa1;
+}
+
+.fs-18{
+  font-size: 18pt;
+}
+
+.fs-14{
+  font-size: 14pt;
+}
+
+.card-header {
+  background: linear-gradient( #0d0938,  #a17aa1);
+  color: white;
+}
+
+.bg{
+  background-color: #a17aa1;
+}
+
+.corModal{
+  background: linear-gradient( #0b082f,  #463546);
+  border: 1px solid #F20F97;
+  border-radius: 10px;
+
 }
 
