@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment.prod';
 import { Tarefa } from '../model/Tarefa';
 import { Usuario } from '../model/Usuario';
+import { AlertasService } from '../service/alertas.service';
 import {TarefasService} from '../service/tarefas.service';
 import { UsuarioService } from '../service/usuario.service';
 
@@ -22,7 +23,7 @@ export class TarefasComponent implements OnInit {
   usuario: Usuario = new Usuario()
 
   idUser = environment.id
-  
+  status = environment.status
   
 
   constructor(
@@ -65,7 +66,6 @@ export class TarefasComponent implements OnInit {
     
     this.tarefasService.postTarefa(this.tarefa).subscribe((resp: Tarefa) =>{
       this.tarefa = resp
-      alert('Tarefa adicionada!')
       this.router.navigate(['/feed'])
   
     })
@@ -73,21 +73,19 @@ export class TarefasComponent implements OnInit {
   
   apagar(id: number){
      this.tarefasService.deleteTarefa(id).subscribe(()=>{
-       alert('Tarefa Deletada!')
        this.router.navigate(['/feed'])
      }) 
   }
 
   atualizar(){
     this.tarefasService.editarTarefa(this.tarefa).subscribe((resp: Tarefa)=>{
-      alert('Atualizado!')
       this.router.navigate(['/feed'])
     })
   }
   
   confirmar(id: number){
     this.tarefasService.confirmarTarefa(id).subscribe((resp : Tarefa )=>{
-      this.tarefa = resp})
+      this.status = true})
   }
 
  /* tarefaConcluida(){

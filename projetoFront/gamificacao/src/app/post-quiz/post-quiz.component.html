@@ -1,27 +1,36 @@
 <div class="container-fluid bg-cor">
 
-    <div class="cor rounded d-flex flex-row justify-content-center">
-        <div class="mt-5 d-flex flex-row justify-content-center align-items-center mb-5">
+    <div class="cor rounded d-flex flex-row justify-content-start ml">
+        <div class="mt-5 d-flex flex-row justify-content-center align-items-center mb-5 ml-5">
             <img class="fotoGrupo mr-4" src="{{grupo.foto}}" alt="">
-            <h1 class="fs-54 text-start p-2">{{grupo.nome}}</h1>
+            <div>
+                <h1 class="fs-54 text-start p-2">{{grupo.nome}}</h1>
+                <p>{{grupo.descricao}}</p>
+            </div>
+
         </div>
     </div>
 
     <div class="col-md-12 d-flex flex-row">
 
         <div class="col-md-6">
-            <div class="card card-atv mt-3">
-                <div class="card-header">
-                    Membros do grupo
-                </div>
-                <div class="card-body d-flex flex-row" *ngFor = 'let inscricao of grupo.listaInscricaoGU'>
-                    <img class='fotoGrupo ml-3' src="{{inscricao.usuarioInscricao.foto}}" alt="">
-                    <div class="ml-3">
-                        <h2>{{inscricao.usuarioInscricao.nome}} {{inscricao.usuarioInscricao.sobrenome}}</h2>
-                        <p>{{inscricao.usuarioInscricao.descricao}}</p>
+            <div class="d-flex flex-column justify-content-center mt-3">
+                <button type="button" class=" btn btn-outline-primary" (click)='inscricaoGU()'>
+                    Se inscrever
+                </button>
+                <div class="card card-atv mt-3">
+                    <div class="card-header">
+                        Membros do grupo
                     </div>
+                    <div class="card-body d-flex flex-row" *ngFor='let inscricao of grupo.listaInscricaoGU'>
+                        <img class='fotoGrupo ml-3' src="{{inscricao.usuarioInscricao.foto}}" alt="">
+                        <div class="ml-3">
+                            <h2>{{inscricao.usuarioInscricao.nome}} {{inscricao.usuarioInscricao.sobrenome}}</h2>
+                            <p>{{inscricao.usuarioInscricao.descricao}}</p>
+                        </div>
 
 
+                    </div>
                 </div>
             </div>
         </div>
@@ -32,7 +41,7 @@
                     Novo Quiz
                 </button>
 
-                <div class="container-fluid border rounded mt-3" *ngFor = 'let post of grupo.listaPostQuiz'>
+                <div class="container-fluid border rounded mt-3" *ngFor='let post of grupo.listaPostQuiz'>
                     <div class="row mb-3 ml-1">Grupo: {{grupo.nome}}</div>
                     <div class="d-flex-column justify-content-center">
                         <h1 class="text-center">{{post.pergunta}}</h1>
@@ -63,39 +72,46 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="titulo">Pergunta</label>
-                            <input type="text" class="form-control bg-transparent text-white" id="pergunta"
+                            <input [(ngModel)]='postQuiz.pergunta' type="text"
+                                class="form-control bg-transparent text-white" id="pergunta"
                                 placeholder="Digite aqui sua pergunta">
                         </div>
                         <div class="form-group">
                             <label for="titulo">Resposta correta</label>
-                            <input type="text" class="form-control bg-transparent text-white" id="respostac"
+                            <input [(ngModel)]='postQuiz.respostaCorreta' type="text"
+                                class="form-control bg-transparent text-white" id="respostac"
                                 placeholder="Digite aqui a resposta correta">
                         </div>
                         <div class="form-group">
                             <label for="titulo">Resposta falsa</label>
-                            <input type="text" class="form-control bg-transparent text-white" id="respostaf"
+                            <input [(ngModel)]='postQuiz.respostaFalsa' type="text"
+                                class="form-control bg-transparent text-white" id="respostaf"
                                 placeholder="Digite aqui a resposta falsa">
                         </div>
                         <div class="form-group">
                             <label for="titulo">Resposta falsa</label>
-                            <input type="text" class="form-control bg-transparent text-white" id="respostaf2"
+                            <input [(ngModel)]='postQuiz.respostaFalsa2' type="text"
+                                class="form-control bg-transparent text-white" id="respostaf2"
                                 placeholder="Digite aqui a resposta falsa">
                         </div>
                         <div class="form-group">
-                            <label for="titulo">Pontuação</label>
-                            <input type="text" class="form-control bg-transparent text-white" id="pontuacao"
-                                placeholder="Atribua uma pontuação de 1 a 10">
-                        </div>
-                        <div class="form-group">
                             <label for="titulo">Mentalidade</label>
-                            <input type="text" class="form-control bg-transparent text-white" id="mentalidade"
+                            <input [(ngModel)]='postQuiz.mentalidade' type="text"
+                                class="form-control bg-transparent text-white" id="mentalidade"
+                                placeholder="Digite aqui a resposta falsa">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="titulo">Pontuação</label>
+                            <input [(ngModel)]='postQuiz.pontuacao' type="text"
+                                class="form-control bg-transparent text-white" id="pontuacao"
                                 placeholder="Atribua uma pontuação de 1 a 10">
                         </div>
 
                         <div class="modal-footer d-flex justify-content-center">
                             <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Fechar</button>
-                            <button type="button" class="btn btn-outline-primary" data-dismiss="modal" 
-                            (click) = 'publicar()' >
+                            <button type="button" class="btn btn-outline-primary" data-dismiss="modal"
+                                (click)='publicar()'>
                                 Adicionar</button>
                         </div>
                     </div>
