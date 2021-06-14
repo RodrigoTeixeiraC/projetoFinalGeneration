@@ -44,7 +44,6 @@ public class PostagemQuiz {
 	
 	private int pontuacao;
 	
-	@NotNull
 	@Enumerated(EnumType.STRING)
 	private Mentalidade mentalidade;
 

@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment.prod';
 import { Tarefa } from '../model/Tarefa';
-import { Usuario } from '../model/Usuario';
 
 @Injectable({
   providedIn: 'root'
@@ -33,7 +32,7 @@ export class TarefasService {
   }
 
   confirmarTarefa(id: number): Observable<Tarefa>{
-    return this.http.put<Tarefa>(`http://localhost:8080/tarefa/confirmar/${id}`, this.token)
+    return this.http.put<Tarefa>(`http://localhost:8080/tarefa/confirmar/${id}`, '', this.token)
   }
 
   deleteTarefa(id:number){

@@ -48,8 +48,7 @@ public class UsuarioService {
 	public Optional<UsuarioLogin> logar(Optional<UsuarioLogin> user) {
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		Optional<Usuario> usuario = repository.findByUsuarioOrEmail(user.get().getUsuario(), user.get().getUsuario());
-		if (usuario.isPresent()) {
-			if (encoder.matches(user.get().getSenha(), usuario.get().getSenha()));
+			if (encoder.matches(user.get().getSenha(), usuario.get().getSenha())) {
 			String auth = user.get().getUsuario() + ":" + user.get().getSenha();
 			byte[] encodeAuth = Base64.encodeBase64(auth.getBytes(Charset.forName("US-ASCII")));
 			String authHeader = "Basic " + new String(encodeAuth);
@@ -62,6 +61,13 @@ public class UsuarioService {
 		}
 		return null;
 	}
+	public Optional<Usuario> atualizarUsuario(Usuario usuario){
+		BCryptPasswordEncoder ecoder = new BCryptPasswordEncoder();
+		String senhaEcoder = ecoder.encode(usuario.getSenha());
+		usuario.setSenha(senhaEcoder);
+		return Optional.ofNullable(repository.save(usuario));	
+	}
+	
 	/**
 	 * Cria um Grupo e seta o usuario existente como seu criador
 	 * 
@@ -76,10 +82,7 @@ public class UsuarioService {
 		return Optional.ofNullable(repositoryGrupo.save(novoGrupo));
 			
 	}
-	public Optional<InscricaoGrupo> inscrevendoGrupo(Usuario novoUsuario, Grupo novoGrupo) {
-		InscricaoGrupo inscricao = new InscricaoGrupo();
-		inscricao.setUsuarioInscricao(novoUsuario);
-		inscricao.setGrupoInscricao(novoGrupo);
+	public Optional<InscricaoGrupo> inscrevendoGrupo(InscricaoGrupo inscricao) {
 		inscricao.setAprovacao(Aprovacao.AGUARDANDO);
 		return Optional.ofNullable(inscricaoRepository.save(inscricao));
 	}

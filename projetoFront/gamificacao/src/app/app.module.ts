@@ -15,6 +15,7 @@ import { GruposComponent } from './grupos/grupos.component';
 import { PerfilComponent } from './perfil/perfil.component';
 import { PerfilVisitanteComponent } from './perfil-visitante/perfil-visitante.component';
 import { PerfilEditComponent } from './edit/perfil-edit/perfil-edit.component';
+import { AlertasComponent } from './alertas/alertas.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { PerfilEditComponent } from './edit/perfil-edit/perfil-edit.component';
     GruposComponent,
     PerfilComponent,
     PerfilVisitanteComponent,
-    PerfilEditComponent
+    PerfilEditComponent,
+    AlertasComponent
   ],
   imports: [
     BrowserModule,

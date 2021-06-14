@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment.prod';
 import { Grupo } from '../model/Grupo';
+import { InscricaoGrupo } from '../model/InscricaoGrupo';
 import { PostagemQuiz } from '../model/PostagemQuiz';
 
 @Injectable({
@@ -23,5 +24,9 @@ export class GrupoPostService {
   postPostagemQuiz(postagem: PostagemQuiz): Observable<PostagemQuiz>{
     return this.http.post<PostagemQuiz>('http://localhost:8080/postagem-quiz', postagem, this.token)
   }  
+
+  postInscricao(inscricao: InscricaoGrupo): Observable<InscricaoGrupo>{
+    return this.http.post<InscricaoGrupo>('http://localhost:8080/usuario/inscricao', inscricao, this.token)
+  }
 }
 

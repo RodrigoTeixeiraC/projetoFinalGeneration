@@ -25,6 +25,12 @@ h3 {
     font-size: 20px;
 }
 
+.fs-24 {
+  font-size: 24px;
+  color: white;
+
+}
+
 .card {
    
   width: 100%;
