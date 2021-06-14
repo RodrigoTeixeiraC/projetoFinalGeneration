@@ -18,6 +18,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 
 @Entity
 @Table (name = "tb_grupo")
@@ -29,10 +31,8 @@ public class Grupo {
 	private long id;
 	
 	@NotNull
-	@Size (min = 4, max = 14)
 	private String nome;
 	
-	@Size (min = 10, max = 200)
 	private String descricao;
 	
 	private String foto;
@@ -40,13 +40,16 @@ public class Grupo {
 	private String icone;
 	
 	@OneToMany (mappedBy = "grupoInscricao", cascade = CascadeType.REMOVE)
+	@JsonIgnoreProperties(value = "grupoInscricao", allowSetters = true)
 	private Set<InscricaoGrupo> listaInscricaoGU = new HashSet<>();
 	
 	@OneToMany (mappedBy = "grupoPostQuiz", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+	@JsonIgnoreProperties(value = "grupoPostQuiz", allowSetters = true)
 	private List<PostagemQuiz> listaPostQuiz = new ArrayList<>();
 	
 	@ManyToOne(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
 	@JoinColumn(name = "criador_id")
+	@JsonIgnoreProperties(value = "gruposCriados", allowSetters = true)
 	private Usuario criador;
 
 	public long getId() {

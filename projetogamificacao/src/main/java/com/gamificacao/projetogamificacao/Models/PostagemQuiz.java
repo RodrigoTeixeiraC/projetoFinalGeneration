@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,6 +19,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "postagem_quiz")
@@ -31,28 +34,23 @@ public class PostagemQuiz {
 	@Size(min = 10, max = 200)
 	private String pergunta;
 	@NotNull
-	@Size(min = 10, max = 200)
 	private String respostaCorreta;
 
 	@NotNull
-	@Size(min = 10, max = 200)
 	private String respostaFalsa;
 
 	@NotNull
-	@Size(min = 10, max = 200)
 	private String respostaFalsa2;
 	
-	@NotNull
 	private int pontuacao;
 	
-	@NotNull
 	@Enumerated(EnumType.STRING)
 	private Mentalidade mentalidade;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date data = new java.sql.Date(System.currentTimeMillis());
 	
-	@ManyToOne 
+	@ManyToOne (fetch = FetchType.EAGER)
 	@JoinColumn
 	private Grupo grupoPostQuiz;
 	

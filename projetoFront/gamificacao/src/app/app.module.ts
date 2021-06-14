@@ -7,10 +7,15 @@ import { AppComponent } from './app.component';
 import { MenuComponent } from './menu/menu.component';
 import { RodapeComponent } from './rodape/rodape.component';
 import { LoginComponent } from './login/login.component';
-import { CadastrarComponent } from './cadastrar/cadastrar.component';
 import { FormsModule } from '@angular/forms';
 import { FeedComponent } from './feed/feed.component';
 import { TarefasComponent } from './tarefas/tarefas.component';
+import { PostQuizComponent } from './post-quiz/post-quiz.component';
+import { GruposComponent } from './grupos/grupos.component';
+import { PerfilComponent } from './perfil/perfil.component';
+import { PerfilVisitanteComponent } from './perfil-visitante/perfil-visitante.component';
+import { PerfilEditComponent } from './edit/perfil-edit/perfil-edit.component';
+import { AlertasComponent } from './alertas/alertas.component';
 
 @NgModule({
   declarations: [
@@ -18,9 +23,14 @@ import { TarefasComponent } from './tarefas/tarefas.component';
     MenuComponent,
     RodapeComponent,
     LoginComponent,
-    CadastrarComponent,
     FeedComponent,
-    TarefasComponent
+    TarefasComponent,
+    PostQuizComponent,
+    GruposComponent,
+    PerfilComponent,
+    PerfilVisitanteComponent,
+    PerfilEditComponent,
+    AlertasComponent
   ],
   imports: [
     BrowserModule,

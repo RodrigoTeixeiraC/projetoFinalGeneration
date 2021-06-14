@@ -1,6 +1,7 @@
 package com.gamificacao.projetogamificacao.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gamificacao.projetogamificacao.Models.PostagemQuiz;
-import com.gamificacao.projetogamificacao.Models.Usuario;
 import com.gamificacao.projetogamificacao.Repository.PostagemQuizRepository;
 import com.gamificacao.projetogamificacao.Service.UsuarioService;
 
@@ -29,16 +29,16 @@ public class PostagemQuizController {
 	private @Autowired UsuarioService usuarioService;
 	
 	@GetMapping 
-	public ResponseEntity<List<PostagemQuiz>> getAllPostagens(){
-		return ResponseEntity.ok(repository.findAll());
+	public Optional<List<PostagemQuiz>> getAllPostagens(){
+		return Optional.ofNullable(repository.findAll());
 	}
 	@GetMapping("/{id}") 
 	public ResponseEntity<PostagemQuiz> getPostagemById(@PathVariable long id){
 		return repository.findById(id).map (postQuiz -> ResponseEntity.ok(postQuiz)).orElse(ResponseEntity.notFound().build());
 	}	
-	@GetMapping("/post-grupos")
-	public ResponseEntity<List<PostagemQuiz>> buscarPostQuiz(Usuario usuario){
-		return ResponseEntity.status(HttpStatus.OK).body(usuarioService.buscarPostQuiz(usuario));
+	@GetMapping("/buscar-post/{id}")
+	public ResponseEntity<List<PostagemQuiz>> buscarPostQuizUsuario(@PathVariable(value = "id") Long id){
+		return ResponseEntity.status(HttpStatus.OK).body(usuarioService.buscarPostQuiz(id));
 	}
 	@PostMapping 
 	public ResponseEntity<PostagemQuiz> postPostagem(@RequestBody PostagemQuiz postagemQuiz){
