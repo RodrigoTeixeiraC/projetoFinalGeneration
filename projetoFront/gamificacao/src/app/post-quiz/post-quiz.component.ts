@@ -28,11 +28,17 @@ export class PostQuizComponent implements OnInit {
  
   constructor(
     private postQuizService: GrupoPostService,
-    private rauter:Router, 
+    private router:Router, 
     private raute:ActivatedRoute
   ) { }
 
   ngOnInit(){
+    window.scroll(0,0)
+    
+    if(environment.token == ''){
+      alert('Sua seção expirou, faça o login novamente.')
+      this.router.navigate(['/login'])
+    }
 
    let id = this.raute.snapshot.params['id']
    this.findGrupoById(id)
