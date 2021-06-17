@@ -16,6 +16,8 @@ import { PerfilComponent } from './perfil/perfil.component';
 import { PerfilVisitanteComponent } from './perfil-visitante/perfil-visitante.component';
 import { PerfilEditComponent } from './edit/perfil-edit/perfil-edit.component';
 import { AlertasComponent } from './alertas/alertas.component';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { OrderModule } from 'ngx-order-pipe';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,9 @@ import { AlertasComponent } from './alertas/alertas.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ModalModule.forRoot(),
+    OrderModule
   ],
   providers: [],
   bootstrap: [AppComponent]

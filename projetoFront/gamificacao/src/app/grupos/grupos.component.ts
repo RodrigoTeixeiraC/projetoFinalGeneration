@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment.prod';
 import { Grupo } from '../model/Grupo';
 import { InscricaoGrupo } from '../model/InscricaoGrupo';
 import { Usuario } from '../model/Usuario';
+import { AlertasService } from '../service/alertas.service';
 import { GrupoService } from '../service/grupo.service';
 import { UsuarioService } from '../service/usuario.service';
 
@@ -25,14 +26,15 @@ export class GruposComponent implements OnInit {
   constructor(
     private router: Router,
     private usuarioService: UsuarioService,
-    private grupoService: GrupoService
+    private grupoService: GrupoService,
+    private alertas: AlertasService
   ) { }
 
   ngOnInit(){
     window.scroll(0,0)
     
     if(environment.token == ''){
-      alert('Sua seção expirou, faça o login novamente.')
+      this.alertas.showAlertInfo('Sua seção expirou, faça o login novamente.')
       this.router.navigate(['/login'])
     }
 
@@ -57,7 +59,7 @@ export class GruposComponent implements OnInit {
     
     this.grupoService.postGrupo(this.grupo).subscribe((resp: Grupo) => {
       this.grupo = resp
-      alert('Grupo criado com sucesso!')
+      this.alertas.showAlertSuccess('Grupo criado com sucesso!')
       this.grupo = new Grupo()
       this.findUsuarioById()
     })

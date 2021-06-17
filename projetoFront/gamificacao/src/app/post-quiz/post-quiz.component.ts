@@ -7,6 +7,7 @@ import { Grupo } from '../model/Grupo';
 import { InscricaoGrupo } from '../model/InscricaoGrupo';
 import { PostagemQuiz } from '../model/PostagemQuiz';
 import { Usuario } from '../model/Usuario';
+import { AlertasService } from '../service/alertas.service';
 
 import { GrupoPostService } from '../service/grupo-post.service';
 
@@ -29,14 +30,15 @@ export class PostQuizComponent implements OnInit {
   constructor(
     private postQuizService: GrupoPostService,
     private router:Router, 
-    private raute:ActivatedRoute
+    private raute:ActivatedRoute,
+    private alertas: AlertasService
   ) { }
 
   ngOnInit(){
     window.scroll(0,0)
     
     if(environment.token == ''){
-      alert('Sua seção expirou, faça o login novamente.')
+      this.alertas.showAlertInfo('Sua seção expirou, faça o login novamente.')
       this.router.navigate(['/login'])
     }
 
@@ -54,7 +56,7 @@ export class PostQuizComponent implements OnInit {
     this.postQuiz.grupoPostQuiz = this.grupo
     this.postQuizService.postPostagemQuiz(this.postQuiz).subscribe((resp: PostagemQuiz)=>{
       this.postQuiz= resp
-      alert ("Postagem realizada com sucesso!")
+      this.alertas.showAlertSuccess ("Postagem realizada com sucesso!")
       this.postQuiz = new PostagemQuiz()
     }) 
     
@@ -67,7 +69,7 @@ export class PostQuizComponent implements OnInit {
 
       this.postQuizService.postInscricao(this.inscricao).subscribe((resp: InscricaoGrupo) => {
         this.inscricao = resp
-        alert('Inscrição realizada com sucesso!')
+        this.alertas.showAlertSuccess('Inscrição realizada com sucesso!')
         this.findGrupoById(this.grupo.id)
       })
       

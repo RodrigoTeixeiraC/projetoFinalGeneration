@@ -25,11 +25,14 @@ export class TarefasComponent implements OnInit {
   idUser = environment.id
   status = environment.status
   
+  key = 'data'
+  reverse = true
 
   constructor(
     private router: Router,
     private tarefasService: TarefasService,
-    private usuarioService: UsuarioService
+    private usuarioService: UsuarioService,
+    private alertas: AlertasService
   ) { }
 
   ngOnInit() {
@@ -39,6 +42,7 @@ export class TarefasComponent implements OnInit {
       this.router.navigate(['/login'])
     }
     this.findUsuarioById()
+    this.getAllTarefas()
 
   }
 
@@ -66,19 +70,21 @@ export class TarefasComponent implements OnInit {
     
     this.tarefasService.postTarefa(this.tarefa).subscribe((resp: Tarefa) =>{
       this.tarefa = resp
+      this.alertas.showAlertSuccess('Tarefa criada!')
       this.router.navigate(['/feed'])
-  
     })
   }
   
   apagar(id: number){
      this.tarefasService.deleteTarefa(id).subscribe(()=>{
+       this.alertas.showAlertDanger('Tarefa apagada!')
        this.router.navigate(['/feed'])
      }) 
   }
 
   atualizar(){
     this.tarefasService.editarTarefa(this.tarefa).subscribe((resp: Tarefa)=>{
+      this.alertas.showAlertInfo('Tarefa atualizada!')
       this.router.navigate(['/feed'])
     })
   }
@@ -88,16 +94,15 @@ export class TarefasComponent implements OnInit {
       this.status = true})
   }
 
- /* tarefaConcluida(){
+  tarefaConcluida(){
       this.usuario.listaTarefas.forEach((resp: Tarefa) => {
         if(resp.status == false){
           this.listaTarefa.push(resp)
         }
+        return this.listaTarefa
       });
-  
-    
   }
-  
+  /*
   tarefaConcluida(){
   this.tarefasService.getAllTarefas().subscribe((resp: Tarefa[])=>{
       resp 

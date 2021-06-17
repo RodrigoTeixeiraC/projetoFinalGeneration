@@ -6,14 +6,13 @@
    color: #ffc107;
    padding: 10px;
 }
-
-
 .fa-instagram:hover{
    color: purple;
 }
 
 .fa-github:hover{
    color: black;
+}
 
 body {
    margin: 0;
