@@ -18,13 +18,15 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.springframework.hateoas.RepresentationModel;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
 @Entity
 @Table (name = "tb_grupo")
 
-public class Grupo {
+public class Grupo extends RepresentationModel<Grupo>{
 	
 	@Id
 	@GeneratedValue (strategy = GenerationType.IDENTITY)

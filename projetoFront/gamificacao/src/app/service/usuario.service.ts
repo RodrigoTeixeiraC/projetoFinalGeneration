@@ -20,4 +20,13 @@ export class UsuarioService {
   getUsuarioById(id: number): Observable<Usuario>{
     return this.http.get<Usuario>(`http://localhost:8080/usuario/${id}`, this.token)
   }
+
+  getAllUsuario(): Observable<Usuario[]>{
+    return this.http.get<Usuario[]>('http://localhost:8080/usuario', this.token)
+  }
+
+  findByNomeOuSobrenome(nome: string): Observable<Usuario[]>{
+    return this.http.get<Usuario[]>(`http://localhost:8080/usuario/nome-sobrenome/${nome}`, this.token)
+    
+  }
 }

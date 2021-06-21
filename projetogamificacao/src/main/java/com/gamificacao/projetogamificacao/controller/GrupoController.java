@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.Link;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.gamificacao.projetogamificacao.Models.Grupo;
+import com.gamificacao.projetogamificacao.Models.Usuario;
 import com.gamificacao.projetogamificacao.Repository.GrupoRepository;
 import org.springframework.web.bind.annotation.PutMapping;
 
@@ -31,13 +33,25 @@ public class GrupoController {
 
 	@GetMapping
 	public ResponseEntity<List<Grupo>> getAllGrupos(){
-		return ResponseEntity.status(HttpStatus.OK).body(repositoryGrupo.findAll());
+		List<Grupo> listaGrupos = repositoryGrupo.findAll();
+		for (Grupo grupo: listaGrupos) {
+			long id = grupo.getId();
+			@SuppressWarnings("deprecation")
+			Link selfLink = new Link("http://localhost:8080/grupo/"+id);
+			grupo.add(selfLink);
+		}
+		return ResponseEntity.ok(listaGrupos);
 	}
 	@GetMapping("/{id}")
 	public ResponseEntity<?> getGrupoById(@Valid @PathVariable long id){
-		return repositoryGrupo.findById(id)
-				.map(grupo -> ResponseEntity.ok(grupo))
-				.orElse(ResponseEntity.notFound().build());
+		Grupo grupo = repositoryGrupo.findById(id).get();
+		@SuppressWarnings("deprecation")
+		Link selfLink = new Link("http://localhost:8080/grupo");
+		grupo.add(selfLink);
+		@SuppressWarnings("deprecation")
+		Link criadorLink = new Link("http://localhost:8080/usuario/"+grupo.getCriador().getId());
+		grupo.getCriador().add(criadorLink);
+		return ResponseEntity.ok(grupo);
 	}
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> deleteGrupoById(@Valid @PathVariable long id){

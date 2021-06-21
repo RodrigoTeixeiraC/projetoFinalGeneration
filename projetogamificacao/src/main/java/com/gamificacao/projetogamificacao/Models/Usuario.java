@@ -14,13 +14,15 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import org.springframework.hateoas.RepresentationModel;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
 @Entity
 @Table (name = "tb_usuarios")
-public class Usuario {
+public class Usuario extends RepresentationModel<Usuario> {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

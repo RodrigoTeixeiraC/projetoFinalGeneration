@@ -7,11 +7,13 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotBlank;
 
+import org.springframework.hateoas.RepresentationModel;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
 @Entity
-public class Tarefa {
+public class Tarefa extends RepresentationModel<Tarefa> {
 	
 	@Id
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
