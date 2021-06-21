@@ -55,6 +55,7 @@ export class GruposComponent implements OnInit {
   }
 
   criarGrupo(){
+    this.grupo.criador = this.usuario
     
     this.grupoService.postGrupo(this.grupo).subscribe((resp: Grupo) => {
       this.grupo = resp

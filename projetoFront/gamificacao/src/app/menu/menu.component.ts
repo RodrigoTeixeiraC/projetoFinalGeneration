@@ -20,7 +20,10 @@ export class MenuComponent implements OnInit {
 
   usuario: Usuario = new Usuario()
   idUsuario: number
+
   confirmarSenha: string
+  listaUsuario: Usuario[]
+  nomeOuSobrenome: string 
 
   constructor(
     private usuarioService: UsuarioService,
@@ -42,6 +45,7 @@ export class MenuComponent implements OnInit {
 
     }
     this.findByIdUsuario(this.id)
+    this.getAllUsuario()
   }
 
   confirmSenha(event: any) {
@@ -80,4 +84,19 @@ export class MenuComponent implements OnInit {
     })
 
   }
+
+  getAllUsuario(){
+    this.usuarioService.getAllUsuario().subscribe((resp: Usuario[])=>{
+      this.listaUsuario = resp
+    })
+  }
+
+  findUsuarioByNome(){
+    if(this.nomeOuSobrenome != ''){
+      this.usuarioService.findByNomeOuSobrenome(this.nomeOuSobrenome).subscribe((resp: Usuario[]) =>{
+        this.listaUsuario = resp
+      })
+    }
+  }
+  
 }

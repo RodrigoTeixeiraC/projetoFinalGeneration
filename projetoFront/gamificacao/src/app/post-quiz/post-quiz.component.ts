@@ -10,6 +10,7 @@ import { Usuario } from '../model/Usuario';
 import { AlertasService } from '../service/alertas.service';
 
 import { GrupoPostService } from '../service/grupo-post.service';
+import { UsuarioService } from '../service/usuario.service';
 
 @Component({
   selector: 'app-post-quiz',
@@ -23,7 +24,9 @@ export class PostQuizComponent implements OnInit {
   postQuiz:PostagemQuiz = new PostagemQuiz
   user: Usuario = new Usuario()
   idUser = environment.id
-  txtBotao: string
+  txtBotaoQuiz: string
+  txtBotaoInscricao: string
+  usuario: Usuario = new Usuario()
   
 
  
@@ -31,7 +34,8 @@ export class PostQuizComponent implements OnInit {
     private postQuizService: GrupoPostService,
     private router:Router, 
     private raute:ActivatedRoute,
-    private alertas: AlertasService
+    private alertas: AlertasService,
+    private usuarioService: UsuarioService
   ) { }
 
   ngOnInit(){
@@ -44,7 +48,7 @@ export class PostQuizComponent implements OnInit {
 
    let id = this.raute.snapshot.params['id']
    this.findGrupoById(id)
-   //this.Botao()
+   this.findUsuarioById()   
   }
 
   findGrupoById(id: number){
@@ -53,23 +57,31 @@ export class PostQuizComponent implements OnInit {
     })
   }
 
- /* Botao(){
-    let id = 0
-    this.grupo.listaInscricaoGU.forEach((inscricao: InscricaoGrupo) => {
-      if(inscricao.usuarioInscricao.id == this.idUser){
-        id = 1
-      }
+  findUsuarioById(){
+    this.usuarioService.getUsuarioById(this.idUser).subscribe((resp: Usuario) => {
+      this.usuario = resp
+      console.log(this.usuario)
+      console.log(this.grupo.criador)
     })
+  }
 
-    if (this.idUser == this.grupo.criador.id){
-      this.txtBotao = "Novo Quiz"
-    } else if (id = 1){
+ botaoQuiz(){
+    if (this.usuario == this.grupo.criador){
+      this.txtBotaoQuiz = "Novo Quiz"
+    } else{
       document.querySelector("#botaoQuiz")?.setAttribute("style", "display: none;")
-    } else {
-      this.txtBotao = "Se inscrever"
-    }
-  }*/
-  
+  }
+}
+
+botaoInscricao(){
+  if(this.usuario != this.grupo.criador){
+    this.txtBotaoInscricao = "Seguir grupo"
+  } else{
+    document.querySelector("#botaoInscricao")?.setAttribute("style", "display: none;")
+    console.log(this.grupo.criador)
+  }
+}
+
   publicar(){
     
     this.postQuiz.grupoPostQuiz = this.grupo

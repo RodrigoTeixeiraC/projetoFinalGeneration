@@ -14,12 +14,14 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import org.springframework.hateoas.RepresentationModel;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
 @Entity
 @Table(name = "tb_inscricao")
-public class InscricaoGrupo {
+public class InscricaoGrupo extends RepresentationModel<InscricaoGrupo> {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
