@@ -3,7 +3,7 @@
 }
 
 .mt-tarefas{
-    margin-top: 470px;
+  margin-top: 50%;
 }
 
 .fs-30{
@@ -35,34 +35,7 @@ html {
     height: 100%;
   }
   
-  body {
-    overflow: hidden;
-    background: #bcdee7 url() no-repeat center center fixed;
-    background-size: cover;
-    padding: 0px;
-    margin: 0px;
-    width: 100%;
-    height: 100%;
-    font: normal 14px/1.618em "Roboto", sans-serif;
-    -webkit-font-smoothing: antialiased;
-  }
-  
-  body:before {
-    content: "";
-    height: 0px;
-    padding: 0px;
-    border: 130em solid #313440;
-    left: 50%;
-    top: 100%;
-    z-index: 2;
-    -webkit-border-radius: 50%;
-    border-radius: 50%;
-    -webkit-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-    -webkit-animation: puff 0.5s 1.8s cubic-bezier(0.55, 0.055, 0.675, 0.19) forwards, borderRadius 0.2s 2.3s linear forwards;
-    animation: puff 0.5s 1.8s cubic-bezier(0.55, 0.055, 0.675, 0.19) forwards, borderRadius 0.2s 2.3s linear forwards;
-  }
-  
+
   h1,
   h2 {
     font-weight: 500;
@@ -138,8 +111,8 @@ html {
     border: 4px solid #FFFFFF;
     -webkit-transform: scale(0);
     transform: scale(0);
-    background: -webkit-linear-gradient(top, #2196F3 0%, #2196F3 50%, #FFC107 50%, #FFC107 100%);
-    background: linear-gradient(#2196F3 0%, #2196F3 50%, #FFC107 50%, #FFC107 100%);
+    background: -webkit-linear-gradient(top, #a17aa1 0%, #a17aa1 50%, #FFC107 50%, #FFC107 100%);
+    background: linear-gradient(#a17aa1 0%, #a17aa1 50%, #FFC107 50%, #FFC107 100%);
     -webkit-border-radius: 50%;
     border-radius: 50%;
     -webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
@@ -206,7 +179,7 @@ html {
   
   .profile-social-links li a {
     display: inline-block;
-    color: red;
+    color:#ffc107;
     width: 24px;
     height: 24px;
     padding: 6px;
