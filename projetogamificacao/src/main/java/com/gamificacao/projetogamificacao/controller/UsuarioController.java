@@ -25,10 +25,11 @@ import com.gamificacao.projetogamificacao.Models.PostagemQuiz;
 import com.gamificacao.projetogamificacao.Models.Usuario;
 import com.gamificacao.projetogamificacao.Models.UsuarioLogin;
 import com.gamificacao.projetogamificacao.Repository.AtividadesRepository;
-import com.gamificacao.projetogamificacao.Repository.GrupoRepository;
 
 import com.gamificacao.projetogamificacao.Repository.UsuarioRepository;
 import com.gamificacao.projetogamificacao.Service.UsuarioService;
+
+import org.springframework.hateoas.Link;
 
 
 @RestController
@@ -38,20 +39,30 @@ public class UsuarioController  {
 
 	private @Autowired UsuarioRepository repositoryUser;
 	private @Autowired UsuarioService usuarioService;
-	private @Autowired GrupoRepository grupoRepository;
 	private @Autowired AtividadesRepository atividadesRepository;
 
 	@GetMapping
 	public ResponseEntity<List<Usuario>> getAllUsuarios(){
-		return ResponseEntity.ok(repositoryUser.findAll());
+		List<Usuario> listaUsuarios = repositoryUser.findAll();
+		for (Usuario usuario: listaUsuarios) {
+			long id = usuario.getId();
+			@SuppressWarnings("deprecation")
+			Link selfLink = new Link("http://localhost:8080/usuario/"+id);
+			usuario.add(selfLink);
+		}
+		return ResponseEntity.ok(listaUsuarios);
 	}
 	@GetMapping ("/{id}")
 	public ResponseEntity<Usuario> getUsuarioById (@PathVariable long id){
-		return repositoryUser.findById(id).map(usuario -> ResponseEntity.ok(usuario)).orElse(ResponseEntity.notFound().build());
+		Usuario usuario = repositoryUser.findById(id).get();
+		@SuppressWarnings("deprecation")
+		Link selfLink = new Link("http://localhost:8080/usuario");
+		usuario.add(selfLink);
+		return ResponseEntity.ok(usuario);
 	}
-	@GetMapping ("/nome-sobrenome")
-	public ResponseEntity <?> getByNomeOrSobrenome (@RequestBody String pesquisa){   
-		return ResponseEntity.ok(repositoryUser.findAllByNome(pesquisa)); 
+	@GetMapping ("/nome-sobrenome/{nome}")
+	public ResponseEntity<List<Usuario>>getByNomeOrSobrenome (@PathVariable String nome){   
+		return ResponseEntity.ok(repositoryUser.findAllByNomeContainingIgnoreCase(nome)); 
 	}
 	@GetMapping("/lista-aprovacao")
 	public ResponseEntity<List<AprovacaoAmigos>> listaAprovacaoAmigos(Usuario usuario){

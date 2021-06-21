@@ -15,8 +15,8 @@
 
         <div class="col-md-6">
             <div class="d-flex flex-column justify-content-center mt-3">
-                <button type="button" class=" btn btn-outline-warning fs-18" (click)='inscricaoGU()'>
-                    Se inscrever
+                <button id="botaoInscricao" type="button" class=" btn btn-outline-warning fs-18" (click)='inscricaoGU()'>
+                    Seguir grupo
                 </button>
                 <div class="card card-atv mt-3">
                     <div class="card-header">
@@ -37,7 +37,12 @@
 
         <div class="col-md-6">
             <div class="d-flex flex-column justify-content-center mt-3">
+
+                
+
+                
                 <button id = 'botaoQuiz' type="button" class=" btn btn-outline-warning fs-18" data-toggle="modal" data-target="#criarTarefa">
+
                     Novo Quiz
                 </button>
 
@@ -96,14 +101,22 @@
                         </div>
                         <div class="form-group">
                             <label for="titulo">Mentalidade</label>
-                            <input [(ngModel)]='postQuiz.mentalidade' type="text"
+                            <select [(ngModel)]='postQuiz.mentalidade' type="text"
                                 class="form-control bg-transparent text-white" id="mentalidade"
-                                placeholder="Digite aqui a resposta falsa">
+                                placeholder="Digite aqui a mentalidade avaliada">
+                                <option class="text-dark" value="">Atenção aos detalhes</option>
+                                <option class="text-dark" value="">Comunicação</option>
+                                <option class="text-dark" value="">Mentalidade de crescimento</option>
+                                <option class="text-dark" value="">Persistência</option>
+                                <option class="text-dark" value="">Planejamento</option>
+                                <option class="text-dark" value="">Proatividade</option>
+                                <option class="text-dark" value="">Responsabilidade pessoal</option>
+                            </select>
                         </div>
 
                         <div class="form-group">
                             <label for="titulo">Pontuação</label>
-                            <input [(ngModel)]='postQuiz.pontuacao' type="text"
+                            <input [(ngModel)]='postQuiz.pontuacao' type="number"
                                 class="form-control bg-transparent text-white" id="pontuacao"
                                 placeholder="Atribua uma pontuação de 1 a 10">
                         </div>

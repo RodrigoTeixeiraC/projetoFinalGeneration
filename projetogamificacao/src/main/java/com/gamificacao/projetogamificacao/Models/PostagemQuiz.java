@@ -20,11 +20,13 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.springframework.hateoas.RepresentationModel;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "postagem_quiz")
-public class PostagemQuiz {
+public class PostagemQuiz extends RepresentationModel<PostagemQuiz> {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

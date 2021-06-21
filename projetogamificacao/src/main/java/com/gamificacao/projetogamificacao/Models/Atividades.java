@@ -10,8 +10,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.springframework.hateoas.RepresentationModel;
+
 @Entity
-public class Atividades {
+public class Atividades extends RepresentationModel<Atividades> {
 	
 	public Atividades() {
 	}

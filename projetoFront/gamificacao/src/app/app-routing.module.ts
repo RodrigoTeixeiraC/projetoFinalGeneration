@@ -22,7 +22,7 @@ const routes: Routes = [
   
   {path: 'grupo/:id', component: PostQuizComponent},
   {path: 'perfil-edit/:id', component: PerfilEditComponent},
-  {path: 'perfil-visitante/:id', component: PerfilVisitanteComponent}
+  {path: 'perfil/:id', component: PerfilVisitanteComponent}
 ];
 
 @NgModule({

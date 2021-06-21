@@ -9,8 +9,10 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
+import org.springframework.hateoas.RepresentationModel;
+
 @Entity
-public class AprovacaoAmigos {
+public class AprovacaoAmigos extends RepresentationModel<AprovacaoAmigos>{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

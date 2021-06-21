@@ -13,15 +13,25 @@
 
     <div class="container d-flex align-items mt-5">
       <div class="row mb-4">
-        <form class="form-inline navbar-nav">
+        
 
           <!--Input pesquisar para ser pensado pós apresentação da generation. GetByNomeAndSobrenome-->
 
-          <input type="search" class="form-control ml-4" placeholder="Pesquisar usuáries" style="border-radius: 2rem" />
-          <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
-            aria-expanded="false"><i class="icons-nav fa fa-search" aria-hidden="true"></i></a>
+          <form class="form-inline navbar-nav">
 
-        </form>
+            <input list="browsers" name="browser" id="browser" type="search" class="form-control ml-4" placeholder="Pesquisar usuáries" style="border-radius: 2rem"
+            [(ngModel)]='nomeOuSobrenome' (ionInput)='findUsuarioByNome()'/>
+
+        
+            
+            <datalist class="" id="browsers">
+              <option *ngFor='let item of listaUsuario' 
+              ><a [routerLink]="['/perfil', item.id]">{{item.nome}} {{item.sobrenome}}</a></option>
+            </datalist>
+
+          </form>
+
+        
       </div>
 
 

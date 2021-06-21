@@ -38,7 +38,6 @@ export class PerfilComponent implements OnInit {
     if(environment.token == ''){
       this.router.navigate(['/login'])
     }
-    this.idUsuario = this.route.snapshot.params['id']
     this.findByIdUsuario(this.id)
   }
 
