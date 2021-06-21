@@ -1,14 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Ranga:wght@700&display=swap');
 
 @import url('https://fonts.googleapis.com/css2?family=Teko&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
+
+body{
+    height:max-content;
+}
 
 .bg-cor{
    
-    background: linear-gradient(180deg, rgba(3, 9, 58, 0.86) 8.2%, rgba(0, 2, 47, 0.87) 19.79%, rgba(3, 9, 58, 0.76) 34.9%, rgba(18, 3, 58, 0.38) 100%), #FFFFFF;
+    background: linear-gradient(180deg, rgba(3, 9, 58, 0.86) 8.2%, rgba(0, 2, 47, 0.87) 19.79%, rgba(3, 9, 58, 0.76) 34.9%,  rgba(18, 3, 58, 0.38) 100%), #FFFFFF;
+    
 } 
 
  .font-geral {
-     font-size: 14px;
+     font-size: 18px;
      font-family: 'Teko', cursive;
  }
 
@@ -33,6 +39,15 @@
     color: #FFC107;
     
     
+     }
+     .tit {
+        font-family: 'Bangers', cursive;
+        font-weight: bold;
+        text-align: center;
+        color: #FFC107;
+        font-size: 110px;
+        -webkit-text-stroke-color: #e90d91;
+         -webkit-text-stroke-width:0.01rem;
      }
     
      .font-texto {
