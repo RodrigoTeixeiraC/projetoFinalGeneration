@@ -51,9 +51,9 @@ public class UsuarioController  {
 	public ResponseEntity<Usuario> getUsuarioById (@PathVariable long id){
 		return repositoryUser.findById(id).map(usuario -> ResponseEntity.ok(usuario)).orElse(ResponseEntity.notFound().build());
 	}
-	@GetMapping ("/nome-sobrenome")
-	public ResponseEntity <?> getByNomeOrSobrenome (@RequestBody String pesquisa){   
-		return ResponseEntity.ok(repositoryUser.findAllByNome(pesquisa)); 
+	@GetMapping ("/nome-sobrenome/{nome}")
+	public ResponseEntity<List<Usuario>>getByNomeOrSobrenome (@PathVariable String nome){   
+		return ResponseEntity.ok(repositoryUser.findAllByNomeContainingIgnoreCase(nome)); 
 	}
 	@GetMapping("/lista-aprovacao")
 	public ResponseEntity<List<AprovacaoAmigos>> listaAprovacaoAmigos(Usuario usuario){
