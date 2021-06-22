@@ -16,23 +16,23 @@ export class TarefasService {
   }
 
   getAllTarefas(): Observable<Tarefa[]>{
-    return this.http.get<Tarefa[]>('http://localhost:8080/tarefa', this.token)
+    return this.http.get<Tarefa[]>('https://you-win.herokuapp.com/tarefa', this.token)
   }
 
   getTarefaById(id: number): Observable<Tarefa>{
-    return this.http.get<Tarefa>(`http://localhost:8080/tarefa/${id}`, this.token)
+    return this.http.get<Tarefa>(`https://you-win.herokuapp.com/tarefa/${id}`, this.token)
   }
 
   postTarefa(tarefa: Tarefa): Observable<Tarefa>{
-    return this.http.post<Tarefa>('http://localhost:8080/tarefa',tarefa, this.token)
+    return this.http.post<Tarefa>('https://you-win.herokuapp.com/tarefa',tarefa, this.token)
   }
 
   editarTarefa(tarefa: Tarefa): Observable<Tarefa>{
-    return this.http.put<Tarefa>('http://localhost:8080/tarefa',tarefa, this.token)
+    return this.http.put<Tarefa>('https://you-win.herokuapp.com/tarefa',tarefa, this.token)
   }
 
   confirmarTarefa(id: number): Observable<Tarefa>{
-    return this.http.put<Tarefa>(`http://localhost:8080/tarefa/confirmar/${id}`, '', this.token)
+    return this.http.put<Tarefa>(`https://you-win.herokuapp.com/tarefa/confirmar/${id}`, '', this.token)
   }
 
   deleteTarefa(id:number){

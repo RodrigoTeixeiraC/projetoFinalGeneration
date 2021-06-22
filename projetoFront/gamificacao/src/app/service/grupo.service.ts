@@ -18,14 +18,14 @@ export class GrupoService {
   }
 
   getAllGrupos(): Observable<Grupo[]>{
-    return this.http.get<Grupo[]>('http://localhost:8080/grupo',this.token)
+    return this.http.get<Grupo[]>('https://you-win.herokuapp.com/grupo',this.token)
   }
 
   getGrupoById(id: number): Observable<Grupo>{
-    return this.http.get<Grupo>(`http://localhost:8080/grupo/${id}`)
+    return this.http.get<Grupo>(`https://you-win.herokuapp.com/grupo/${id}`)
   }
 
   postGrupo(grupo: Grupo): Observable<Grupo>{
-    return this.http.post<Grupo>('http://localhost:8080/usuario/novo-grupo', grupo, this.token)
+    return this.http.post<Grupo>('https://you-win.herokuapp.com/usuario/novo-grupo', grupo, this.token)
   }
 }

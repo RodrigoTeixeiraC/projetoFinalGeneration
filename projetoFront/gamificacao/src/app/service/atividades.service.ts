@@ -16,10 +16,10 @@ token ={
   headers: new HttpHeaders().set('Authorization', environment.token)
 }
 getAtividadesById(id: number): Observable<Atividades>{
-  return this.http.get<Atividades>(`http://localhost:8080/atividades/${id}`, this.token)
+  return this.http.get<Atividades>(`https://you-win.herokuapp.com/atividades/${id}`, this.token)
 }
 
 getAllAtividades(): Observable<Atividades[]>{
-  return this.http.get<Atividades[]>('http://localhost:8080/atividades',this.token)
+  return this.http.get<Atividades[]>('https://you-win.herokuapp.com/atividades',this.token)
 }
 }

@@ -18,10 +18,10 @@ export class MenuService {
   }
 
   getAllTarefas(): Observable<Tarefa[]> {
-    return this.http.get<Tarefa[]>('http://localhost:8080.com/tarefa', this.token) 
+    return this.http.get<Tarefa[]>('https://you-win.herokuapp.com/tarefa', this.token) 
   }
   atualizarUsuario(usuario: Usuario): Observable<Usuario> {
-    return this.http.put<Usuario>('http://localhost:8080/usuario', usuario, this.token)
+    return this.http.put<Usuario>('https://you-win.herokuapp.com/usuario', usuario, this.token)
   }
 }
 

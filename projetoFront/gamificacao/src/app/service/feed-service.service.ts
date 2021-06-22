@@ -20,18 +20,18 @@ export class FeedServiceService {
       }
 
       getPostagemByUsuario(id: number): Observable<PostagemQuiz[]>{
-        return this.http.get<PostagemQuiz[]>(`http://localhost:8080/postagem-quiz/buscar-post/${id}`, this.token)
+        return this.http.get<PostagemQuiz[]>(`https://you-win.herokuapp.com/postagem-quiz/buscar-post/${id}`, this.token)
       }
 
       getAtividadesByUsuario(id: number): Observable<Atividades[]>{
-        return this.http.get<Atividades[]>(`http://localhost:8080/atividades/atividades-amigos/${id}`, this.token)
+        return this.http.get<Atividades[]>(`https://you-win.herokuapp.com/atividades/atividades-amigos/${id}`, this.token)
       }
 
       postAtividade(atividade: Atividades): Observable<Atividades>{
-        return this.http.post<Atividades>('http://localhost:8080/usuario/post-pensamentos', atividade, this.token)
+        return this.http.post<Atividades>('https://you-win.herokuapp.com/usuario/post-pensamentos', atividade, this.token)
       }
 
       getAllPostQuiz(): Observable<PostagemQuiz[]>{
-        return this.http.get<PostagemQuiz[]>('http://localhost:8080/postagem-quiz',this.token)
+        return this.http.get<PostagemQuiz[]>('https://you-win.herokuapp.com/postagem-quiz',this.token)
       }
 }
